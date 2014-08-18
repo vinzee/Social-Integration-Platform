@@ -1,0 +1,52 @@
+<% if @fb %>
+ <!-- -----------------------------------Me (Personal Details)----------------------------------------- -->
+ <%  	fb_me = @fb.get_object("me") %>
+ <ul class="row-fluid">
+    <li class="span1">
+    <%=  image_tag @fb.get_picture("me",:type => 'square'), :class =>'img-polaroid img-small' %>
+    </li>
+    <li class="span11">
+      <ul class="row-fluid">
+        <li class="span3">
+            <b><%= fb_me['name'] %></b> <small>(<%= fb_me['username'] %>)</small><br>   
+            <i><%= fb_me['gender'] %></i>, <%= fb_me['relationship_status'] %><br>
+            <% if fb_me['birthday'] %>
+              <small>Born on</small> <i><%= fb_me['birthday'] %></i><br> 
+            <% end %>
+            <% if fb_me['hometown'] %>
+              <small>From</small> <i><%= fb_me['hometown']['name'] %></i>
+            <% end %>
+                
+        </li>
+
+        <li class="span4">
+          
+          <% if fb_me['email'] %>
+            <b>Email : </b> <i><%= fb_me['email'] %></i><br> 
+          <% end %>
+
+          <% if fb_me['location'] %>
+            <b>Current Location : </b> <i><%= fb_me['location']['name'] %></i><br> 
+          <% end %>
+
+        </li>
+
+        <li class="span4">
+          
+          <% if fb_me['education'] %>
+            <b>Current School :</b> <% f = fb_me['education'].last %><br>
+                                <i><%= f['school']['name'] %></i><br>
+                                <% if f['concentration'] %>    
+                                    <small>Branch :</small> <i><%= f['concentration'].first['name'] %></i> 
+                                <% end %>
+                                <% if f['year'] %>
+                                    <small>from</small> <i><%= f['year']['name'] %></i><br>
+                                <% end %>    
+          <% end %>   
+          <%= link_to truncate(fb_me['link'],:length => 60), fb_me['link'] %><br>
+
+        </li>
+      </ul>                   
+    </li>
+
+<% end %>

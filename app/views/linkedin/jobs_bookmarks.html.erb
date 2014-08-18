@@ -1,0 +1,61 @@
+<% if @li %>
+		<!-- ----------------------------------- Job Bookmarks ----------------------------------------- -->
+		<% j_b =  @li.job_bookmarks %>
+
+	<div class="row-fluid box">
+		<div class="span4">
+			<h5>Jobs Bookmarks <small>(<%= j_b.total %>)</small></h5>
+		</div>
+		<div class="span3 offset5">
+			<%= link_to "Job Suggestions", {:controller => 'linkedin',:action => 'jobs_suggestions'} %>
+		</div>
+	</div>
+		
+	<br>
+
+	<% if j_b.total > 0 %>
+	<% j_b.all.each do |f| %>
+		<% f = f.to_hash %>
+		<%  j = f['job']  %>
+
+		<div class="row-fluid">
+			<div class="span8">
+				<b><%= j['position']['title'] %></b> @ <b><%= j['company']['name'] %></b>
+			</div>
+			<div class="span2">
+				<%= link_to "Job Details", {:controller => 'linkedin',:action => 'jobs_profile',:id => j['id']} %>
+			</div>
+			<div class="span2">
+				<small><%= Time.at(j['posting_timestamp']).to_formatted_s(:short) %></small>
+			</div>
+		</div>	
+
+		<div class="row-fluid">
+			<div class="span11">
+				<i><%= j['description_snippet'] if j['description_snippet'] %></i><br>
+			</div>
+		</div>
+
+		<div class="row-fluid box">
+			<div class="span8">		
+				&nbsp;	
+				<% if f['is_applied'] == 'true'%>
+					<span class="label label-success">Applied</span>
+				<% else %>
+					<span class="label label-important">Not Applied</span>
+				<% end %>
+				&nbsp;
+				<% if f['is_saved'] == 'true'%>
+					<span class="label label-success">Saved</span>
+				<% else %>
+					<span class="label label-important">Not Saved</span>
+				<% end %>	
+			</div>
+		</div>
+		<br>
+	<% end %>
+	<% end %>
+
+
+
+<% end %>

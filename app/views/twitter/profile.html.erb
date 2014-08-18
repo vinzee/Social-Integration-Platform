@@ -1,0 +1,36 @@
+<% if @tw %>
+<% tw_user = @tw.user()%>
+		<ul class="row-fluid">
+			<li class="span1">
+				<%= image_tag(tw_user['profile_image_url_https'], :class =>'img-polaroid') %>
+	  		</li>
+	  		<li class="span10">
+	  			<ul>
+			   		<b> <%= tw_user['name'] %> <small class="grey">@<%= tw_user['screen_name'] %></small></b>
+			   		<% if tw_user['location'] != "" %>
+			  			,<%= tw_user['location'] %><br>
+			  		<% end %>
+			  		<% if tw_user['description'] != "" %>
+			  			<i><%= tw_user['description'] %></i><br>	
+			  		<% end %>
+			  	</ul>
+
+				<ul class="row-fluid">
+					<li class="span2"><b>Followers</b><br><%= tw_user['followers_count'] %></li>
+					<li class="span2"><b>Following</b><br><%= tw_user['friends_count'] %></li>
+	  				<li class="span2"><b>Listed Count</b><br><%= tw_user['listed_count'] %></li>
+	  				<li class="span2"><b>Favourites</b><br><%= tw_user['favourites_count'] %></li>
+	  				<li class="span2"><b>Statuses</b><br><%= tw_user['statuses_count'] %></li>
+	  			</ul>
+			</li>
+		</ul>
+<% tw_user['id'] %><br>
+<% tw_user['url'] %><br>
+<% tw_user['verified'] %><br>
+<% elsif %>
+      <%=  link_to "Sign in with Twitter", "/auth/twitter" %><br>
+<% end %>
+
+<style>
+	ul{margin: 0 0 10px 25px;}
+</style>

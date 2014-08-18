@@ -1,0 +1,105 @@
+<% if @li %>
+
+		<!-- ----------------------------------- Company ----------------------------------------- -->
+
+		<h4> Company : </h4>
+
+		<% li_com = @li.profile(:fields => [:following,:suggestions]) %>
+
+
+<div class="row-fluid">
+
+<h5> Following : </h5>
+
+	<table class="table" style="table-layout:fixed; text-align:center">
+
+		<% i =0 %>	
+
+		<tr>
+	   	 	<th class="span2" >Sr.No.</th>
+	    	<th class="span4" >Name</th>
+	    </tr>	
+		<% if li_com['following']['companies']['total'] > 0 %>
+			<% li_com['following']['companies']['all'].each do |f| %>
+				<% f =  f.to_hash %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td><%= f['name'] %></td>
+			      <%# f['id'] %>
+			      <td><%= link_to "Profile", {:controller => 'linkedin',:action => 'company_profile',:id => f['id'] }, :class => "btn btn-info btn-small"  %></td>
+			      <td><%= link_to "Updates", {:controller => 'linkedin',:action => 'company_updates',:id => f['id'] }, :class => "btn btn-success btn-small"  %></td>
+			      <td>
+			      	<%= link_to "Unfollow", {:controller => 'linkedin',:action => 'unfollow',:id => f['id'] }, :class => "btn btn-warning btn-small"  %>
+			      	<%# link_to "Statistics", {:controller => 'linkedin',:action => 'company_statistics',:id => f['id'] }, :class => "btn btn-warning"  %>
+			      </td>
+			    </tr>
+		    <% end %>
+	    <% end %> 
+
+	    </table>
+
+
+	    <h5> Suggestions : </h5><br>	
+
+	    <table class="table" style="table-layout:fixed; text-align:center">
+			
+			<% i = 0 %>	
+			<tr>
+		   	 	<th class="span2" >Sr.No.</th>
+		    	<th class="span4" >Name</th>
+		    </tr>	
+
+			<% if li_com['suggestions']['to_follow']['companies']['_count'] > 0 %>
+				<% li_com['suggestions']['to_follow']['companies']['all'].each do |f| %>
+					<% f =  f.to_hash %>
+				    <tr>
+				      <td><%= i+=1 %></td>
+				      <td><%= f['name'] %></td>
+				      <%# f['id'] %>
+				      <td><%= link_to "Profile", {:controller => 'linkedin',:action => 'company_profile',:id => f['id'] }, :class => "btn btn-info btn-small"  %></td>
+			     	  <td><%= link_to "Updates", {:controller => 'linkedin',:action => 'company_updates',:id => f['id'] }, :class => "btn btn-success btn-small"  %></td>
+			    	  <td>
+			    	  	<%= link_to "Follow", {:controller => 'linkedin',:action => 'follow',:id => f['id'] }, :class => "btn btn-warning btn-small"  %>
+			    	  	<%# link_to "Statistics", {:controller => 'linkedin',:action => 'company_statistics',:id => f['id'] }, :class => "btn btn-warning"  %>
+			    	  </td>
+				    </tr>
+			    <% end %>
+		    <% end %> 
+			
+
+
+	</table>
+
+
+	<h5> Is Admin </h5><br>	
+		    
+	<% li_com = @li.company(:is_admin => 'true') %>
+
+	<table class="table" style="table-layout:fixed; text-align:center">
+			
+			<% i = 0 %>	
+			<tr>
+		   	 	<th class="span2" >Sr.No.</th>
+		    	<th class="span4" >Name</th>
+		    </tr>	
+
+			<% if li_com['total'] > 0 %>
+				<% li_com['all'].each do |f| %>
+					<% f =  f.to_hash %>
+				    <tr>
+				      <td><%= i+=1 %></td>
+				      <td><%= f['name'] %></td>
+				      <%# f['id'] %>
+				      <td><%= link_to "Profile", {:controller => 'linkedin',:action => 'company_profile',:id => f['id'] }, :class => "btn btn-info btn-small"  %></td>
+			     	  <td><%= link_to "Updates", {:controller => 'linkedin',:action => 'company_updates',:id => f['id'] }, :class => "btn btn-success btn-small"  %></td>
+			    	  <td>
+			    	  	<%= link_to "Statistics", {:controller => 'linkedin',:action => 'company_statistics',:id => f['id'] }, :class => "btn btn-warning btn-small"  %>
+			    	  </td>
+				    </tr>
+			    <% end %>
+		    <% end %> 
+
+
+</div>
+ 
+<% end %>

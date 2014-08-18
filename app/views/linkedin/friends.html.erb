@@ -1,0 +1,78 @@
+<!-- ----------------------------------- Connections ----------------------------------------- -->
+
+<% if @li %>
+
+	<% li_con = @li.connections %>
+		<h4> Connections <small>(<%= li_con.total%>)</small></h4>
+
+		<% li_con.all.each do |f| %>
+		<% fh = f.to_hash %>
+		<ul class="row-fluid box">
+            <li class="span1">
+            	<% fh['id'] %>
+	  			<% if fh['picture_url'] %>
+					<%= image_tag fh['picture_url'],:class =>'img-polaroid' %><br>
+				<% else%>
+					<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %><br>
+				<% end %>
+	  		</li>
+	  		<li class="span7"> 		
+		  		<b><%= link_to fh['first_name'] +" "+ fh['last_name'], fh['site_standard_profile_request']['url']%></b><br>
+		  		<i><%= fh['headline']%></i><br>
+		  		<% if fh['industry'] %> 
+		  			<i><%= fh['industry'] %></i><br>
+		  		<% end %>
+		  		<%= fh['location']['name'] %><br>
+	  		</li>
+	  		<li class="span1">
+	  			<%= link_to "Profile", {:controller => 'linkedin',:action => 'user_profile',:id => fh['id'] }, :class => "btn btn-info btn-small"  %>
+  			</li>
+  			<li class="span1 offset1">
+	  			<%# link_to "Message", :class => "btn btn-success",:data_toggle => "modal",:role => "button" %>
+	  			<a href="#myModal" role="button" class="btn btn-success btn-small" data-toggle="modal" onclick = "pass_id('<%= fh['id'] %>')">Message</a>
+  			</li>
+	  		<br>
+  		</ul>
+  		<% end %>
+
+  	<br><br><br>
+
+  	<script>
+
+  	function pass_id(id)
+  	{
+  		document.getElementById('id').value = id;
+  	}
+
+  	</script>
+  	
+		
+
+<% end %>
+
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Quick Info</h3>
+  </div>
+  <div id='quick_info' class="modal-body">
+    
+    <%= form_tag( :action => 'message' ) do  %>
+		<ul class='span12'>
+		      <li class='span3'><%= text_field_tag :subject, nil, placeholder: 'Enter Subject' %></li>
+		      <li class='span6'><%= text_area_tag :msg, nil, size: "25x5",maxlength: 20, placeholder: 'Enter Message Text...'  %></li>
+		      <%= hidden_field_tag 'id' %>
+		      
+		      <li class='span3'></li>
+	    </ul>  
+ </div>
+
+  <div class="modal-footer">  
+  	<li class='span3'><br><%= submit_tag "Post Message", class: "btn btn-primary" %></li>
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" >Close</button>
+  </div>
+
+  	<% end %>
+
+</div>

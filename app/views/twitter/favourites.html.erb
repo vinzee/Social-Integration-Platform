@@ -1,0 +1,68 @@
+<!-- ----------------------------------- Friends ----------------------------------------- -->
+
+<% if @tw %>
+	<% if !@page %>
+		<% @page = 1 %>
+	<% end %>
+	<ul class="row-fluid">
+		<li class="span10">
+			<h4 class="box"> Favourites </h4>
+		</li>
+		<li class="span2">
+			<div class="pagination pagination-right">
+			  <ul>
+			    <li>
+			    	<% if @page.to_i > 1 %>
+			    		<%= link_to "<<", {:controller => 'twitter',:action => 'favourites', :page => @page.to_i - 1}  %>
+			    	<% end %>
+			    </li>
+			    <li><%= link_to ">>", {:controller => 'twitter',:action => 'favourites', :page => @page.to_i + 1}  %></li>
+			  </ul>
+			</div>
+		</li>
+	</ul>
+
+	<% tw_friends = @tw.favorites( :page => @page) %>
+	<% tw_friends.each do |f| %>
+		<ul class="row-fluid box">
+            <li class="span1">
+	  			<%= image_tag(f['user']['profile_image_url_https'], :class =>'img-polaroid') %>
+	  		</li>
+	  		<li class="span11"> 	
+	  			<ul class="row-fluid"> 		
+		  			 <li class="span10">
+				  		<b><%= f['user']['name'] %></b> @<%= f['user']['screen_name'] %>
+			  		 </li>
+			  		 <li class="span2">
+			  			<% t = Time.at(f['created_at']) %>
+						<%= t.to_formatted_s(:short) %>
+			  		 </li>
+		  		 </ul>
+		  		<div class="left-move">
+			  		<p><%= auto_link(f['text']) %></p>
+			  		<p>	
+			  			<%= link_to " Delete ", {:controller => 'twitter',:action => 'del', :id => f['id'].to_i }  %>
+			  			<%= link_to ' <i class="icon-retweet"></i> Retweet '.html_safe, {:controller => 'twitter',:action => 'retweet', :id => f['id'].to_i }  %>
+				  		<% if f['favorited'] == true %>
+				  			<%= link_to ' <i class="icon-star"></i> Unfavorite '.html_safe, {:controller => 'twitter',:action => 'unfav', :id => f['id'].to_i }  %>
+				  		<% else %>
+				  			<%= link_to ' <i class="icon-star"></i> Favorite '.html_safe, {:controller => 'twitter',:action => 'fav', :id => f['id'].to_i }  %>
+				  		<% end %>
+				  	</p>
+				</div>
+	  		</li> 
+  		</ul>	 
+  	<% end %>
+  	<ul class="pager">
+		  <li>
+		  	<% if @page.to_i > 1 %>
+ 				<%= link_to "Previous Page", {:controller => 'twitter',:action => 'favourites', :page => @page.to_i - 1}  %>
+ 			<% end %>
+ 		  </li>
+		  <li>
+		  	<%# if li_wall._start < li_wall._count %>
+ 				<%= link_to "Next Page", {:controller => 'twitter',:action => 'favourites',:page =>  @page.to_i + 1}  %>
+		 	<%# end %>
+		 </li>
+	</ul>
+<% end %>		

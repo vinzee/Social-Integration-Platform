@@ -1,0 +1,32 @@
+<% if @fb %>
+ 
+<!-- ---------------------------------Pages intro----------------------------------------- -->
+ 
+ <h4> Pages : </h4>
+ 
+ <% pages = @fb.get_connections('me', 'accounts') %>
+ 
+ No of pages: <%= pages.size  %><br>
+
+ <% var = 'nothing' %>
+	 
+
+	 <table class="table ">
+  		<tr>
+    		<th>Sr.No.</th>
+   			<th>Name</th>
+  		</tr>
+  	<% i=0 %>
+  	<% pages.each do |f| %>
+    <% var = f['access_token'] %>
+    <% var.to_s %>
+    <tr>
+      <td><%= i+=1 %></td>
+      <td><%= f['name'] %></td>
+      <td><%= link_to "Page Profile", {:controller => 'facebook',:action => 'page_profile',:token => var}, class: "btn btn-info btn-small"  %></td>
+      <td><%= link_to "Page Feeds", {:controller => 'facebook',:action => 'page_feeds',:token => var}, class: "btn btn-success btn-small"  %></td>
+     </tr>
+ 	
+ <% end %>
+ </table>
+<% end %>

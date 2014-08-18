@@ -1,0 +1,177 @@
+<% if @li %>
+
+		<!-- ----------------------------------- Company ----------------------------------------- -->
+
+		<h4> Company : </h4>
+
+		<%if !@page %>
+			<% @page = 0 %>
+		<% end %>
+
+		<!-- ----------------------------------- Company Status Update ----------------------------------------- -->
+		<!-- <%# if @page == 0 %>
+			
+
+			<h5><small>Status Update</small></h5>
+
+			<%# form_tag( :action => 'post' ) do  %>
+			<ul class="row-fluid">
+		      <li class='span4 offset2'><%# text_area_tag :msg, nil,:length => '100'  %></li>
+		      <%# hidden_field_tag 'type', 'company'%>
+		      <%# hidden_field_tag 'id', '@id'%>
+		      <li class='span3'><br><%# submit_tag "Post", class: "btn btn-primary" %></li>
+		    </ul>  
+		    <%# end %>
+	    <%# end %> -->
+
+
+		<% li_con = @li.company_updates(:id => @id,:start => @page) %>
+
+		
+		<%# li_con._count %><br>
+		  <b>
+		  <% if li_con._start %>
+				<%= li_con._start + 1%>
+		  <% else %>
+					0
+		  <% end %>
+		  </b>
+		  of <%= li_con.total %><br>
+
+
+		<%  if li_con.total > 0%>	
+			<% if li_con._start %>
+							<% i = li_con._start.to_i*10 %>
+	    	  <% else %>
+					<% i = 0 %>
+		     <% end %>	
+			
+			<% li_con.all.each do |f| %>
+				<% f = f.to_hash %>
+
+	<div class="box">
+				<div class="row-fluid">
+					<div class="span3 offset1">
+						
+					</div>
+					<div class="span3 offset1">
+					<small>
+						<% if f['update_content']['company_job_update'] %>
+							Company Job Update
+						<% elsif f['update_content']['company_status_update'] %>
+							Company Status Update
+						<% else %>
+							unknown
+						<% end %>
+					</small>
+					</div>
+					<div class="span2 offset1">
+						<small><%= Time.at(f['timestamp']).to_formatted_s(:short) %></small>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3 offset1">
+					<br>
+					<b><%= f['update_content']['company']['name'] %></b><br>
+					<% if !f['update_content']['company_job_update'] && !f['update_content']['company_status_update']%>
+							<% f['update_content'].each do |k,v|%>
+								<%= k %><br>
+							<% end %>
+						<% end %>
+					</div>
+					<% if f['update_content']['company_job_update'] %>
+					<div class="span4 center">
+						
+							<small>Action :</small> <%= f['update_content']['company_job_update']['action']['code'] %><br>							
+							<small>Job :</small>
+							<% jb = f['update_content']['company_job_update']['job'] %>	
+							<b><%= jb['position']['title'] %></b> @ <b><%= jb['company']['name'] %></b><br>
+							<i><%= jb['description'] %></i><br>
+							
+					</div>
+					<div class="span4 center">
+						<%= link_to 'Location Description',jb['site_job_request']['url'] %><br>
+						<%= link_to 'Job Request',jb['site_job_request']['url'] %><br>
+					</div>
+					<% elsif f['update_content']['company_status_update'] %>
+					<div class="span4 center">
+							<% cjb = f['update_content']['company_status_update']['share'] %>
+
+							<% if cjb['content'] %>
+								<i><% cjb['content']['title'] if cjb['content']['title'] %></i><br>				
+								<%= image_tag cjb['content']['submitted_image_url'],:class => 'img-polaroid' if cjb['content']['submitted_image_url'] %><br>
+								<small><%= cjb['comment'] if cjb['comment']%></small><br>
+								<%# image_tag cjb['content']['thumbnail_url'],:class => 'img-rounded' %>	
+								<%# image_tag cjb['content']['submitted_url'] %>
+							<% end %>
+					</div>	
+					<div class="span4 center">
+					<br>	
+					<% if cjb['content'] %>
+						<%= link_to 'Eyebrow URL',cjb['content']['eyebrow_url'] %><br>
+						<%= link_to 'Shortened URL',cjb['content']['shortened_url'] %><br>	
+					<% end %>	
+						<small>Source :</small> <i><%= cjb['source']['service_provider']['name'] %></i><br>
+						<small>Visibility :</small> <i><%= cjb['visibility']['code'] %></i><br>
+					</div>
+					<% end %>
+					
+					
+				</div>
+			 		
+				<!-- <b>Likes:</b> <%# @li.company_updates_likes(f['update_key'],:id => @id) %><br>
+				<b>Comments:</b> <%# @li.company_updates_comments(f['update_key'],:id => @id) %><br> -->
+
+				<% if f['is_likable'] == true || f['is_commentable'] == true %>
+			 	<div class="row-fluid">
+			 		<div class="span5 offset2">
+						<% if f['is_likable'] == true %>
+							<% if f['is_liked'] == true %>
+								<%= link_to glyph('thumbs_down') + f['num_likes'] , {:controller => 'linkedin',:action => 'unlike',:key => f['update_key']} %>.
+							<% else %>
+								<%= link_to glyph('thumbs_up') + f['num_likes'], {:controller => 'linkedin',:action => 'like',:key => f['update_key']} %>.
+							<% end %>
+							<% if f['is_commentable'] == true %>
+								<%= link_to glyph('comment'), {:controller => 'linkedin',:action => 'comment',:key => f['update_key']} %>.
+							<% end %>
+						<% end %>
+
+						<%= f['num_likes'] %> <%= link_to "Likes", {:controller => 'linkedin',:action => 'share_likes',:key => f['update_key']} %>.
+						<%= f['update_comments'] %> <%= link_to "Comments", {:controller => 'linkedin',:action => 'share_comments',:key => f['update_key']} %>. <br>	
+					</div>
+				</div>
+				<% end %>
+		</div>
+			<% end %>
+		<% end %>
+
+
+
+		<% if li_con._start %>			 
+				<ul class="pager">
+				  <li>
+				  	<% if li_con._start > 0 %>
+		 				<%= link_to "Previous Page", {:controller => 'linkedin',:action => 'company_updates',:id => @id,:page => li_con._start - 1}  %>
+		 			<% end %>
+		 		  </li>
+				  <li>
+				  	<% if li_con._start < li_con._count %>
+		 				<%= link_to "Next Page", {:controller => 'linkedin',:action => 'company_updates',:id => @id,:page => li_con._start + 1} %>
+				 	<% end %>
+				 </li>
+				</ul>
+		 <% end %>
+
+
+		<br><br>
+		<br><br>
+		
+		<%# li_com = @li.company_updates_comments(:update_key => ) %>
+
+
+		<br><br>
+		<br><br>
+
+		<%# li_li = @li.company_updates_likes(:id => @id) %>
+
+<% end %>

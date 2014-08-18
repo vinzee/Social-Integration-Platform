@@ -1,0 +1,474 @@
+<% if @li %>
+	<!-- ----------------------------------- Network Updates ----------------------------------------- -->
+		<% if !@page%>
+			<% @page = 0 %>
+		<% end %>
+
+		<% wall =  @li.network_updates(:start => @page) %>
+
+
+		<div class="row-fluid">
+			<div class="span4 offset2">
+				<h4> Network Updates </h4>
+			</div>
+			<div class="span4 offset2">
+				<b><%= (wall._start / 10) + 1 %></b> of <%= wall.total %> Pages
+			</div>
+		</div>
+	
+		<% i = 0 %>
+
+		<% wall.all.each do |f| %>
+		<% f = f.to_hash %>
+
+		<div class="row-fluid">
+
+			<div class="span2">
+				<!-- <u>Post <%# (wall._start*10)+i+=1 %> : </u> -->
+			</div>
+			
+
+			
+			<div class="span4 offset2" style="color:GREY">
+				<% ut =  f['update_type'] %>
+
+				<% case ut  %>
+				<% when 'APPS','APPM' %>
+					Application Update
+				<% when 'CMPY'  %>
+				  Company Follow Update
+				<% when 'MSFC'  %>
+				  Member Starts Following Company
+				<% when 'CONN'  %>
+				  Connection Update
+				<% when 'CCEM'  %>
+				  Connection Suggestions
+				<% when 'JOBS','JOBP'  %>
+					Posted a Job Update
+				<% when 'JGRP'  %>
+					Joined a group Update
+				<% when 'PICT','PICU' %>
+					Changed Profile Picture Update
+				<% when 'PFOL'  %>
+					People Follow Uodate
+				<% when 'PRFX'  %>
+					Extented Profile Update
+				<% when 'RECU','PREC','SVRP'  %>
+					Recommendation
+				<% when 'PRFU','PROF' %>
+					Changed Profile
+				<% when 'SHAR'  %>
+					Shared Item
+				<% when 'STAT'  %>
+					Status Update
+				<% when 'VIRL'  %>
+					Viral Update
+				<% else %>  
+				  <%= ut %>
+				<% end %>
+			</div>
+
+			<div class="span3 offset1">
+				<small><%= Time.at(f['timestamp']).to_formatted_s(:short) %></small>
+			</div>
+			<br>
+		</div>
+
+		<div class="row-fluid box">
+			
+			<% if f['update_content'] %>
+				<% case ut  %>
+					<% when 'APPS','APPM' %>
+					   <div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span5">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request'], :target => '_blank' %><br>
+							</div>
+							<div class="span6">
+								<b>New Connections :</b><br>
+								<% f['update_content']['person']['person_activities']['all'].each do |f| %>
+									<%= f['acttivity']['body'] %> <br>
+								<% end %>
+							</div>
+						</div>
+					<% when 'CMPY' %>
+					   <% f['update_content'].each do |k,v| %>
+					  	<%= k %><br>
+					  <% end %>
+					<% when 'CONN' %>
+						<div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+										<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+						    <% end %>
+						    </div>
+						    <div class="span5">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request'], :target => '_blank' %><br>
+							</div>
+							<div class="span6">
+								<b>New Connection :</b><br>
+								<% f['update_content']['person']['connections']['all'].each do |f| %>
+									<%= f['first_name'] %> <%= f['last_name'] %><br>
+									<i><%= f['headline'] %></i><br>
+									<%= link_to "Linkedin Profile",f['site_standard_profile_request']['url'], :target => '_blank' %><br>
+								<% end %>
+							</div>
+						</div>
+							
+							
+
+					<% when 'CCEM'  %>
+					 <div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span5">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request']['url'], :target => '_blank' if f['update_content']['person']['site_standard_profile_request'] %><br>
+							</div>
+					</div>	
+
+					<% when 'JOBS','JOBP' %>
+						<div class="row-fluid">
+						    <div class="span6">
+						    	<%= f['update_content']['job']['position']['title'] %> @ <%= f['update_content']['job']['company'] %>
+					    	</div>
+						    <div class="span6">
+								<%= f['update_content']['job']['job_poster']['first_name'] %> <%= f['update_content']['job']['job_poster']['last_name'] %><br>
+								<%= f['update_content']['job']['headline'] %><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['job']['job_poster']['site_standard_profile_request']['url'], :target => '_blank' %><br>
+							</div>
+					</div>	
+
+					<% when 'JGRP'  %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request']['url'], :target => '_blank' if f['update_content']['person']['site_standard_profile_request'] %><br>
+							</div>
+							<div class="span5">
+								<% if f['update_content']['person']['member_groups']['total'] > 0 %>
+								<% f['update_content']['person']['member_groups']['all'].each do |f| %>
+									Group : <%=	f['name'] %><br>
+									<%=	link_to 'Site Group Request',f['site_group_request']['url'] %><br>
+								<% end %>
+								<% end %>
+							</div>
+						</div>	
+
+
+					<% when 'MSFC'  %>
+						  <div class="row-fluid">
+							<div class="span1">
+								<% c = f['update_content']['company_person_update']%>
+								<% if c['person']['picture_url'] %>
+									<%= image_tag c['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<%= c['person']['first_name'] %> <%= c['person']['last_name'] %><br>
+								<i><%= c['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',c['person']['site_standard_profile_request']['url'], :target => '_blank' %><br>
+							</div>
+							<div class="span5">
+								<%= f['update_content']['company_person_update']['action']['code'] %> : <b><%= f['update_content']['company']['name'] %></b><br>
+							</div>	
+						</div>	
+						
+
+					<% when 'PICT','PICU' %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% c = f['update_content'] %>
+								<% if c['person']['picture_url'] %>
+									<%= image_tag c['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<%= c['person']['first_name'] %> <%= c['person']['last_name'] %><br>
+								<i><%= c['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',c['person']['site_standard_profile_request']['url'], :target => '_blank' %><br>
+							</div>
+							<div class="span5">
+								<%# f['update_content']['person']['following'] %><br>
+							</div>	
+						</div>	
+
+					<% when 'PFOL'  %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% c = f['update_content'] %>
+								<% if c['person']['picture_url'] %>
+									<%= image_tag c['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<%= c['person']['first_name'] %> <%= c['person']['last_name'] %><br>
+								<i><%= c['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',c['person']['site_standard_profile_request']['url'], :target => '_blank' %><br>
+							</div>
+							<div class="span5">
+								<%= f['update_content']['person']['following'] %><br>
+							</div>	
+						</div>	
+
+					<% when 'PRFX'  %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% c = f['update_content']['person']%>
+								<% if c['person']['picture_url'] %>
+									<%= image_tag c['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<%= c['person']['first_name'] %> <%= c['person']['last_name'] %><br>
+								<i><%= c['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',c['person']['site_standard_profile_request']['url'], :target => '_blank' %><br>
+							</div>
+							<div class="span5">
+								<%= f['update_content']['twitter_accounts'] %><br>
+							</div>	
+						</div>	
+
+					<% when 'RECU','PREC','SVRP'  %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% c = f['update_content']['company_person_update']%>
+								<% if c['person']['picture_url'] %>
+									<%= image_tag c['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<%= c['person']['first_name'] %> <%= c['person']['last_name'] %><br>
+								<i><%= c['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',c['person']['site_standard_profile_request']['url'], :target => '_blank' %><br>
+							</div>
+							<div class="span5">
+								<%= f['update_content']['recommendations_given'] %><br>
+							</div>	
+						</div>	
+
+					<% when 'PRFU','PROF' %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span5">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request']['url'], :target => '_blank' if f['update_content']['person']['site_standard_profile_request'] %><br>
+							</div>
+						</div>	
+
+					<% when 'SHAR'  %>
+						<div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span5">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request']['url'], :target => '_blank' if f['update_content']['person']['site_standard_profile_request'] %><br>
+							</div>
+							<div class="span6">
+							<!-- if my_string.include? "cde" -->
+							<% if f['update_content']['person']['current_share']['comment'] %> 
+								Comment : <br>
+								<i><%= auto_link(f['update_content']['person']['current_share']['comment']) %></i>
+							<% end %>
+							</div>
+						</div>	
+
+				    <% when 'STAT'  %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span5">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request']['url'], :target => '_blank' if f['update_content']['person']['site_standard_profile_request'] %><br>
+							</div>
+						<% if f['update_content']['person']['current_share'] %>
+								Status : <br>
+								<i><%= auto_link(f['update_content']['person']['current_status']) %></i>
+						<% end %>
+						</div>	
+
+					<% when 'VIRL'  %>
+						 <div class="row-fluid">
+							<div class="span1">
+								<% if f['update_content']['person']['picture_url'] %>
+									<%= image_tag f['update_content']['person']['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<b><%= f['update_content']['person']['first_name'] %> <%= f['update_content']['person']['last_name'] %></b><br>
+								<i><%= f['update_content']['person']['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',f['update_content']['person']['site_standard_profile_request']['url'], :target => '_blank' if f['update_content']['person']['site_standard_profile_request'] %><br>
+							</div>
+							<div class="span5">
+								
+								<% if f['update_content']['update_action']['action']['code'] == 'LIKE'%>
+									<b>Liked</b>
+								<% else %>
+									<b>Commented</b>						
+							</div>
+						</div>
+						<% uc = f['update_content']['update_action']['original_update'] %>	
+						<% ucp = f['update_content']['update_action']['original_update']['update_content']['person'] %>
+						<br>
+						<div class="row-fluid">
+							<div class="span1">
+								<% if ucp['picture_url'] %>
+									<%= image_tag ucp['picture_url'],:class =>'img-polaroid' %><br><br>
+								<% else %>
+									<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %><br><br>
+							    <% end %>
+						    </div>
+						    <div class="span6">
+								<b><%= ucp['first_name'] %> <%= ucp['last_name'] %></b><br>
+								<i><%= ucp['headline'] %></i><br>
+								<%= link_to 'Linkedin Profile',ucp['site_standard_profile_request']['url'], :target => '_blank' if ucp['site_standard_profile_request'] %><br>
+							</div>
+							<div class="span5">
+							<% if uc['likes'] %>
+								<b>Likes(<i><%= uc[num_likes] %></i>) %></b>
+								<% uc['likes'].each do |l| %>
+									<%= l['like']['person']['first_name'] %> <%= l['like']['person']['last_name'] %><br>
+								<% end %>
+							<% end %>													
+							</div>
+
+						</div>	
+					<% end %>  
+			 	<% end %>
+
+			<% if f['is_likable'] == true || f['is_commentable'] == true %>
+		 	<div class="row-fluid">
+		 	<br>
+		 		<div class="span5">
+					<% if f['is_likable'] == true %>
+						<% if f['is_liked'] == true %>
+							<%= link_to glyph('thumbs_down') + ' Unlike' , {:controller => 'linkedin',:action => 'unlike',:key => f['update_key']} %>.
+						<% else %>
+							<%= link_to glyph('thumbs_up') + ' Like', {:controller => 'linkedin',:action => 'like',:key => f['update_key']} %>.
+						<% end %>
+
+					<% end %>
+					<% if f['is_commentable'] == true %>
+						<a href="#CommentModal<%= i %>" role="button"  data-toggle="modal"><%= glyph('comment') %> Comment</a>.
+
+						<div id="CommentModal<%= i %>" style="margin-left: -155px;" class="modal hide fade span5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="myModalLabel">Post a Comment</h3>
+							</div>
+							<div class="modal-body">
+								<%= form_tag( :action => 'comment' ) do  %>
+									<div class="control-group">
+										<center>
+									    <div class="controls">
+									    	<%= text_area_tag :msg, nil,:size =>"15x4",:maxlength => '140',:placeholder => 'Enter your comment'  %>
+								    	</div>
+								    	<div class="controls">
+									      <%= hidden_field_tag 'key', f['update_key'] %>
+								      	</div>
+								      	<br>
+									    </center>
+								    </div>
+							   
+							</div>
+							<div class="modal-footer">
+								<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+								<%= submit_tag "Post", class: "btn btn-primary" %>
+							</div>
+							 <% end %>
+						</div>
+					<% end %>
+
+					<% if f['is_likable'] == true %>
+						<%= link_to "Likes", {:controller => 'linkedin',:action => 'share_likes',:key => f['update_key']} %>.
+						<%# f['num_likes'] %>	
+					<% end %>
+					<% if f['is_commentable'] == true %>	
+						<%# f['update_comments']['total'] %> <%= link_to "Comments", {:controller => 'linkedin',:action => 'share_comments',:key => f['update_key']} %>.	
+					<% end %>
+					
+					
+				</div>
+			</div>
+			<% end %>
+	<% end %>
+		
+		</div>
+		<% i = i + 1 %>
+		<% end %>
+
+		<br><br>
+
+
+		<ul class="pager">
+		  <li>
+		  	<% if wall._start > 0 %>
+ 				<%= link_to "Previous Page", {:controller => 'linkedin',:action => 'wall',:id => @group_id,:page => wall._start - 10}  %>
+ 			<% end %>
+ 		  </li>
+		  <li>
+		  	<% if wall._start < wall.total-1 %>
+ 				<%= link_to "Next Page", {:controller => 'linkedin',:action => 'wall',:id => @group_id,:page => wall._start + 10} %>
+		 	<% end %>
+		 </li>
+		</ul>
+		
+
+<% end %>

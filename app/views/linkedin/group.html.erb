@@ -1,0 +1,33 @@
+<% if @li %>
+
+		<!-- ----------------------------------- Groups subscribed to ----------------------------------------- -->
+		<% li_con = @li.group_memberships %>
+		<h4> Groups <small>(<%= li_con.total %>)</small> </h4><br>
+
+		
+		<% li_con = li_con.all %>
+		<% if li_con %>
+			<table class="table box">
+			  <tr>
+			    <th>Sr.No.</th>
+			    <th>Name</th>
+			    <th>Membership State</th>
+			    <th></th>
+			  </tr>
+			  <% i=0 %>
+			  <% li_con.each do |f|%>
+			  	<% fh = f.to_hash %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td><%= fh['group']['name'] %> <%# fh['id'] %></td>
+			      <td><%= fh['membership_state']['code'] %></td>
+			      <td><%= link_to "Profile", {:controller => 'linkedin',:action => 'group_profile',:id => fh['id'] }, :class => "btn btn-info btn-small"  %></td>
+			      <td><%= link_to "Wall Feed", {:controller => 'linkedin',:action => 'group_feed',:id => fh['id']}, :class => "btn btn-success btn-small"  %></td>
+			    </tr>
+			  <% end %>
+			</table>
+		<% else %>
+			<center>No Groups Followed</center>
+		<% end %>
+
+<% end %>

@@ -1,0 +1,57 @@
+<% if @tw %>
+<h4 class="box"> Profile </h4>
+<% tw_user = @tw.user()%>
+
+		<ul class="row-fluid">
+			<center>
+				<%= image_tag(tw_user['profile_image_url_https'].gsub('_normal',''), :class =>'img-polaroid') %><br>
+	  		</center>
+	  	</ul>
+	  	<ul class="row-fluid">
+	  		<li class="span10">
+					<table class="table">
+						<tr>
+							<th>Name</th><td><%= tw_user['name'] %></td>
+						</tr>
+						<tr>
+							<th>Screen Name</th><td><%= tw_user['screen_name'] %></td>
+						</tr>
+						<tr>
+							<th>Location</th><td><%= tw_user['location'] %></td>
+						</tr>
+						<tr>	
+							<th>Description</th><td><%= tw_user['description'] %></td>
+						</tr>
+						<tr>
+							<th>URL</th><td><%= tw_user['url'] %></td>
+						</tr>
+						<tr>
+							<th>Followers Count</th><td><%= tw_user['followers_count'] %></td>
+						</tr>
+						<tr>
+							<th>Friends Count</th><td><%= tw_user['friends_count'] %></td>
+						</tr>
+						<tr>
+							<th>Listed Count</th><td><%= tw_user['listed_count'] %></td>
+						</tr>
+						<tr>	
+							<th>Favourites Count</th><td><%= tw_user['favourites_count'] %></td>
+						</tr>
+						<tr>
+							<th>Statuses Count</th><td><%= tw_user['statuses_count'] %></td>
+						</tr>
+						<tr>
+							<th>created At</th><td><%= tw_user['created_at'] %></td>
+						</tr>
+						<tr>
+							<th>Protected</th><td><%= tw_user['protected'] %></td>
+						</tr>
+						<tr>	
+							<th>Verified</th><td><%= tw_user['verified'] %></td>
+						</tr>
+					</table>
+			</li>
+		</ul>
+<% elsif %>
+      <%=  link_to "Sign in with Twitter", "/auth/twitter" %><br>
+<% end %>

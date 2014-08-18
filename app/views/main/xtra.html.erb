@@ -1,0 +1,251 @@
+
+<div class='notifications top-left'></div>
+<div class='notifications top-right'></div>
+<div class='notifications bottom-left'></div>
+<div class='notifications bottom-right'></div>
+
+<div class="page-header">
+  <h1>Xtraz <small> test area </small></h1>
+</div>
+
+
+<button class="get_code">Get Code</button><br>
+<pre>
+<div class="code">
+</div>
+</pre>
+<br>
+
+<div class="row-fluid">
+				<div class="span2" id="fb">
+					<%= image_tag 'fb.png', length:50, width:50 %>
+				</div>
+				<div class="span2" id="tw">
+					<%= image_tag('tw.jpg', length:50, width:50) %>
+				</div>
+				<div class="span2" id="li">
+					<%= image_tag('li.png', length:50, width:50) %>
+				</div>
+				<div class="span2" id="fb1">
+					<%= image_tag 'fb.png', length:50, width:50 %>
+				</div>
+				<div class="span2" id="tw1">
+					<%= image_tag('tw.jpg', length:50, width:50) %>
+				</div>
+				<div class="span2" id="li1">
+					<%= image_tag('li.png', length:50, width:50) %>
+				</div>
+</div>
+<br><br><br>
+ 
+<input type="button" class="btn btn-primary" value="Go Back !" onclick="history.back(-1)" /><br><br><br><br>
+
+<div id="notify" class="row-fluid well well-small">
+
+	<h3>Bootstrap Notify</h3><br>
+
+	<div id="t-l" class="span2 offset2">
+		<button class="btn btn-primary">Top Left</button>
+	</div>
+	<div id="t-r" class="span2">
+		<button class="btn btn-primary">Top Right</button>
+	</div>
+	<div id="b-l" class="span2">
+		<button class="btn btn-primary">Bottom Left</button>
+	</div>
+	<div id="b-r" class="span2">
+		<button class="btn btn-primary">Bottom Right</button>
+	</div>
+
+</div>
+ 
+<br><br>
+
+<div id="bootbox" class="row-fluid well well-small">
+
+	<h3>Bootbox</h3><br>
+
+	<div id="alert" class="span2 offset2">
+		<button class="btn btn-primary">Alert</button>
+	</div>
+	<div id="confirm" class="span2">
+		<button class="btn btn-primary">Confirm</button>
+	</div>
+	<div id="prompt" class="span2">
+		<button class="btn btn-primary">Prompt</button>
+	</div>
+	<div id="custom" class="span2">
+		<button class="btn btn-primary">Custom</button>
+	</div>
+
+</div>
+ 
+<br><br>
+
+<div>
+   	<em>Emphasized text</em><br>
+	<strong>Strong text</strong><br>
+	<dfn>Definition term</dfn><br>
+	<code>A piece of computer code</code><br>
+	<samp>Sample output from a computer program</samp><br>
+	<kbd>Keyboard input</kbd><br>
+	<var>Variable</var>
+</div>
+
+<br><br>
+
+<script>
+
+
+
+	txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+	txt+= "<p>Browser Name: " + navigator.appName + "</p>";
+	txt+= "<p>Browser Version: " + navigator.appVersion + "</p>";
+	txt+= "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+	txt+= "<p>Platform: " + navigator.platform + "</p>";
+	txt+= "<p>User-agent header: " + navigator.userAgent + "</p>";
+	txt+= "<p>User-agent language: " + navigator.language + "</p>";
+
+	$("#example").html=txt;
+
+	$('a.printPage').click(function(){
+           window.print();
+           return false;
+	}); 
+
+$('#alert').click(function()
+{
+		bootbox.alert("Hello & Welcome to the SIP!", function() {
+	});
+
+});
+
+$('#confirm').click(function()
+{
+		bootbox.confirm("Are you sure?", function() {
+	});
+
+});
+
+$('#prompt').click(function()
+{
+		bootbox.prompt("What is your name??", function(result) {
+
+		if (result === null) 
+		{                                             
+	    	console.log("Prompt dismissed");                              
+	    } 
+	  else 
+	  {
+	    	console.log("Your Name is :" + result);                          
+	  }
+	});
+
+});
+
+$('#custom').click(function()
+{
+		bootbox.dialog("I am a custom dialog", [{
+    "label" : "Success!",
+    "class" : "btn-success",
+    "callback": function() {
+        console.log("great success");
+    }
+}, {
+    "label" : "Danger!",
+    "class" : "btn-danger",
+    "callback": function() {
+        console.log("uh oh, look out!");
+    }
+}, {
+    "label" : "Click ME!",
+    "class" : "btn-primary",
+    "callback": function() {
+        console.log("Primary button");
+    }
+}, {
+    "label" : "Just a button..."
+}]);
+
+});
+
+	$("#t-l").click(function() {
+
+		$('.top-left').notify({
+    message: { text: 'Aw yeah, It works!' }, type: 'success'
+  }).show();
+	});
+
+	$("#t-r").click(function() {
+
+		$('.top-right').notify({
+    message: { text: 'Aw yeah, It works!' }, type: 'danger'
+  }).show();
+	});
+
+	$("#b-l").click(function() {
+
+		$('.bottom-left').notify({
+    message: { text: 'Aw yeah, It works!' }, type: 'info'
+  }).show();
+	});
+
+	$("#b-r").click(function() {
+
+		$('.bottom-right').notify({
+    message: { text: 'Aw yeah, It works!' }, type: 'warning'
+  }).show();
+	});
+
+	
+
+
+$(document).ready(function(){
+
+//$(this).transition({ x: '40px' });
+//$('.box').stop().transition({ scale: 1.1 });
+//$('.box').stop().transition({ scale: 1.0 });
+
+$('.get_code').click(function(){
+	$('.code').text("fucka");
+});
+
+
+	$('#fb').hover(function(){	
+		$(this).transition({
+		  perspective: '1000px',
+		  rotateX: '180deg'
+		}); 
+	}, function(){
+		
+		$(this).transition({
+		  perspective: '1000px',
+		  rotateX: '0deg'
+		}); 
+	});
+
+
+	$('#tw').hover(function(){	
+		$(this).transition({
+		  perspective: '5000px',
+		  rotate3d: '1,1,0,180deg'
+		}); 
+	}, function(){
+		
+		$(this).transition({
+		  perspective: '1000px',
+		 rotate3d: '1,1,0,0deg'
+		}); 
+	});
+
+
+	$('#fb1').hover(function(){
+		$(this).stop().transition({ scale: 2.2 });
+	}, function(){
+		$(this).stop().transition({ scale: 1.0 });
+	});
+
+
+});
+
+</script>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+  <title>Social Integration Platform</title>
+  <%= favicon_link_tag 'sip.ico' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= stylesheet_link_tag params[:controller] %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag params[:controller] %>
+  <% if params[:action] == "plugins" ||  params[:action] == "wall" || params[:action] == "analytics"%>
+    <%= stylesheet_link_tag params[:action] %>
+    <%= javascript_include_tag params[:action] %>
+  <% end %>
+  <!-- <script src='http://goo.gl/NU49f3' type='text/javascript'></script> -->
+  <!-- <link href='http://goo.gl/x9HirR' rel='stylesheet' type='text/css'> -->
+  <%= csrf_meta_tags %> 
+</head>
+
+<body style="background:url(/assets/bg.png);" class="loading">
+
+<!-- Plugin Code -->
+  <!-- <div class='sm share'>Share :<br>
+  <a id='fb_share_a'></a>
+  <br><a id='tw_share_a'></a>
+  <br><a id='ln_share_a'></a></div> -->
+<!-- End -->
+
+<div id="wrap">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+      <a class="brand" style="opacity:0.7" href="/main/home">Social Integration Platform</a>
+      <ul class="nav pull-centre">
+        <li> <%= link_to '<i class="icon-home"></i> Home'.html_safe,'/main/home' %></li>
+        <li> <%= link_to('<i class="fa fa-tags"></i> Plugins'.html_safe,"/main/plugins")%> </li>
+        <li> <%= link_to('<i class="fa fa-rss"></i> Social Wall'.html_safe,"/main/wall")%> </li>
+        <li> <%= link_to('<i class="fa fa-bar-chart-o"></i> Analytics'.html_safe,"/main/analytics")%> </li>
+        <li> <%= link_to('<i class="fa fa-bookmark"></i> About Us'.html_safe,"/main/about")%> </li>
+        
+        
+      </ul>
+      <ul class="nav pull-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-hover="dropdown" href="#">
+            <i class="icon-user"></i> Welcome, 
+            <% if @current_user %>
+                <%= @current_user.user_name %>
+            <% elsif current_user %>
+               <%= current_user.user_name %>
+            <% else %>
+               Guest
+            <% end %>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= render 'devise/menu/registration_items' %></li>
+            <li><%= render 'devise/menu/login_items' %></li>  
+          </ul>
+        </li>  
+        <li><%= link_to('<i class="fa fa-male"></i> Admin'.html_safe,"/admin/login")%></li>  
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <% if notice || alert %>
+  <p class="alert"><%= notice %> <br> <%= alert %> </p>
+  <% end %>
+
+
+
+
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span1">
+      </div>
+      <div class="span10 main" style="box-shadow: rgba(0,0,0,.23) 0 10px 15px; padding: 25px; min-height:600px;font-size:12px; background-color:WHITE;">
+        <!--Body content-->
+        <%= yield %>
+      </div>
+      <div class="span1">
+        <% if params[:action] == "wall"%>
+          <div class="refreshh">
+            <button class="btn btn-small affix rf"><i class="icon-refresh"></i> Refresh </button>
+          </div>
+          <div id="scroll_to_top" style="cursor: pointer;">
+            <i class="fa fa-chevron-circle-up fa-3x affix"></i>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% if params[:action] == "wall" || params[:action] == "plugins" || params[:action] == "analytics"%>
+      <div class="modall"></div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<%= render 'partials/footer' %>
+</body>
+</html>

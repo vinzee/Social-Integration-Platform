@@ -1,0 +1,164 @@
+<div class="brdr">
+	<div class="tabbable" style="margin-top: -18px;">
+		<div class="affix tabs">		
+			 <ul class="nav nav-tabs pos">
+			    <li class="active"><a href="#pane1" id="facebook" data-toggle="tab"> <i class="fa fa-facebook-square"></i> Facebook </a></li>
+			    <li><a href="#pane2" id="twitter" data-toggle="tab"><i class="fa fa-twitter-square"></i> Twitter </a></li>
+			    <li><a href="#pane3" id="linkedin" data-toggle="tab"><i class="fa fa-linkedin-square"></i> LinkedIn</a></li>
+			    <button class="btn btn-primary btn-small" type="button" data-toggle="modal" data-target="#status_update" ><i class="icon-pencil"></i> Update Status </button>
+			 </ul>
+		</div>
+		<div class="line affix profile fm2"><a style="margin-left: 18px; ">View Profile</a> <i class="fa fa-angle-double-down"></i></div>
+
+		<div class="affix back" style="margin-top: 150px;margin-left: 20px;">
+			<h5> <i class="fa fa-arrow-circle-left fa-2x"></i> Back</h5>
+		</div>
+
+		<div class="tab-content" style="margin-top: 40px;">
+		    <div id="pane1" class="tab-pane active">
+		    	<div class="tabbable">      
+		    		<iframe src="/facebook/profile" class="line affix profile fm1" height="100px"></iframe>
+		    		
+		    		<div class="affix side">
+		    			<ul class="nav nav-tabs nav-stacked facebookk">
+					          <li class="active"><a href="#fb_timeline" data-toggle="tab"> Timeline <i class="icon-chevron-right"></i></a></li>
+					          <li><a href="#fb_profile_wall" id="fb_profile_wall_tab" data-toggle="tab"> User timeline <i class="icon-chevron-right"></i></a></li>
+					          <li><a href="#fb_friends" id="fb_friends_tab" data-toggle="tab"> Friends <i class="icon-chevron-right"></i></a></li>
+					          <li><a href="#fb_pages" id="fb_pages_tab" data-toggle="tab"> Pages <i class="icon-chevron-right"></i></a></li>
+					          <li><a href="#fb_profile" id="fb_profile_tab" data-toggle="tab"> Profile <i class="icon-chevron-right"></i></a></li>
+					    </ul>
+					</div>
+
+		    		<div class="row-fluid">
+		    			<div class="span2"></div>
+			  		  
+				        <div class="tab-content frame_bottom span10">
+				            <div id="fb_timeline" class="tab-pane t1 active"></div>
+				            <div id="fb_profile_wall" class="tab-pane t2"></div>
+				            <div id="fb_friends" class="tab-pane t3"></div>
+				            <div id="fb_pages" class="tab-pane t4"></div>
+				            <div id="fb_profile" class="tab-pane t5"></div>
+				        </div>
+				    </div>
+			    </div>
+		    </div>
+
+		    <div id="pane2" class="tab-pane">
+		   		<div class="tabbable">			
+		   			<iframe src="/twitter/profile" class="line affix profile fm1" height="100px"></iframe>   			
+		   			<div class="affix side">
+		   				<ul class="nav nav-tabs nav-stacked twitterr">
+							    <li class="active"><a href="#tw_timeline" data-toggle="tab"> Timeline <i class="icon-chevron-right"></i></a></li>
+							    <li><a href="#tw_tweets" id="tw_tweets_tab" data-toggle="tab"> Tweets <i class="icon-chevron-right"></i></a></li>
+							    <li><a href="#tw_fav" id="tw_fav_tab" data-toggle="tab"> Favorites <i class="icon-chevron-right"></i></a></li>
+							    <li><a href="#tw_following" id="tw_following_tab" data-toggle="tab"> Following <i class="icon-chevron-right"></i></a></li>
+							    <li><a href="#tw_followers" id="tw_followers_tab" data-toggle="tab"> Followers <i class="icon-chevron-right"></i></a></li>
+							    <li><a href="#tw_profile" id="tw_profile_tab" data-toggle="tab"> Profile <i class="icon-chevron-right"></i></a></li>
+						</ul>
+		   			</div>
+
+		   			<div class="row-fluid">
+		    			<div class="span2"></div>
+					  
+						<div class="tab-content frame_bottom span10">
+						    <div id="tw_timeline" class="tab-pane t6 active"></div>
+						    <div id="tw_tweets" class="tab-pane t7"></div>
+						    <div id="tw_fav" class="tab-pane t8"></div>
+						    <div id="tw_following" class="tab-pane t9"></div>
+						    <div id="tw_followers" class="tab-pane t10"></div>
+						    <div id="tw_profile" class="tab-pane t11"></div>
+					 	</div>
+					</div>
+				</div>
+		    </div>
+
+		    <div id="pane3" class="tab-pane">
+		    	<div class="tabbable">    
+		    		<iframe src="/linkedin/profile" class="line affix profile fm1" height="100px"></iframe> 
+		    		
+		    		<div class="affix side">
+		    				<ul class="nav nav-tabs nav-stacked linkedinn">
+						        <li class="active"><a href="#ln_timeline" data-toggle="tab"> Timeline <i class="icon-chevron-right"></i></a></li>
+						        <li><a href="#ln_friends" id="ln_friends_tab" data-toggle="tab"> Friends <i class="icon-chevron-right"></i></a></li>
+						        <li><a href="#ln_group" id="ln_group_tab" data-toggle="tab"> Groups <i class="icon-chevron-right"></i></a></li>
+						        <li><a href="#ln_jobs" id="ln_jobs_tab" data-toggle="tab"> Jobs <i class="icon-chevron-right"></i>	</a></li>
+						        <li><a href="#ln_company" id="ln_company_tab" data-toggle="tab"> Company <i class="icon-chevron-right"></i>	</a></li>
+						        <li><a href="#ln_profile" id="ln_profile_tab" data-toggle="tab"> Profile <i class="icon-chevron-right"></i>	</a></li>
+						    </ul>
+		    		</div>
+
+		    		<div class="row-fluid">
+		    			<div class="span2"></div>
+			  
+					    <div class="tab-content frame_bottom span10">
+					        <div id="ln_timeline" class="tab-pane t12 active"></div>
+					        <div id="ln_friends" class="tab-pane t13"></div>
+					        <div id="ln_group" class="tab-pane t14"></div>
+					        <div id="ln_jobs" class="tab-pane t17"></div>
+					        <div id="ln_company" class="tab-pane t15"></div>
+					        <div id="ln_profile" class="tab-pane t16"></div>
+					    </div>
+					</div>
+			  	</div>
+		    </div>
+	 	 </div>
+	</div>
+</div>
+
+<div id="status_update" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Status Update</h3>
+  </div>
+  <div class="modal-body">
+    <%= form_tag(:action => 'post',:html => { :class => 'form-horizontal' }) do  %>
+    	<div class="control-group">
+		    <div class="controls">
+		    	<center>
+		    	<% if @fb && @tw && @li %>
+		    	<label class="checkbox inline">
+		      		<%= check_box_tag 'all_share' %>All
+		      	</label>
+		      	<% end %>
+		      	<% if @fb %>
+		      	<label class="checkbox inline">
+		      		<%= check_box_tag 'fb_share' %>Facebook   
+		      	</label>
+		      	<% end %>
+		      	<% if @tw %>
+		      	<label class="checkbox inline">
+		      		<%= check_box_tag 'tw_share' %>Twitter    
+		      	</label>
+		      	<% end %>
+		      	<% if @li %>
+		      	<label class="checkbox inline">
+		      		<%= check_box_tag 'li_share' %>Linkedin 
+		      	</label>
+		      	<% end %>
+		      	</center>
+		    </div>  
+		</div>	
+		<br>
+	      <div class="control-group">
+	      	 <div class="control-label inline">
+	      	 	<center>
+			      <%= text_area_tag :msg, nil,:size =>"15x4",:maxlength => '140',:placeholder => 'Enter your post' %><br>
+			    </center>   
+			      <%# hidden_field_tag 'wall', 'group'%>
+		     </div>
+	      </div>
+	      
+     	 <div class="row-fluid inline">
+     	 	<center>
+     	 		<small class="grey inline"><b><div id="msg_size">0 characters</div></b> (max 140)</small>
+     	 	</center>
+ 	 	 </div>
+		  
+	
+  </div>
+  <div class="modal-footer">
+  	<%= submit_tag "Post", class: "btn btn-primary post_share" %>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+  <% end %>
+</div>

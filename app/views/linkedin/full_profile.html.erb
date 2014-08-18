@@ -1,0 +1,181 @@
+<% if @li %>
+
+
+
+<!-- ----------------------------------- Profile ----------------------------------------- -->
+
+	<h4> Profile </h4>
+
+	<% li_pic = @li.picture_urls %>
+
+	<center>
+	<% if li_pic.all %>
+		<%= image_tag(li_pic.all.first, :class =>'img-polaroid') %><br><br>
+	<% else %>
+		<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %><br><br>
+    <% end %>
+	</center>
+
+
+
+	<% li_me = @li.profile(:fields => [:id,:first_name, :last_name , :formatted_name ,:headline,:location,:industry,:current_share,:summary,:picture_url,:associations, :honors, :interests,:positions,:educations,:public_profile_url,:site_standard_profile_request,:specialties,:num_connections,:email_address,:publications,:patents,:skills,:certifications,:date_of_birth,:phone_numbers,:job_bookmarks,:following,:suggestions,:last_modified_timestamp,:recommendations_received,:related_profile_views,:honors_awards,:main_address]) %>
+
+	<% li_me = li_me.to_hash %><br><br>
+
+
+	<% i = 0 %>
+
+
+<div class="row-fluid">
+	<table class="table">
+
+	  <tr>
+	    <th class="span1" >Sr.No.</th>
+	    <th class="span3" >Name</th>
+	    <th class="span8" >Value</th>
+	  </tr>
+  
+
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>First Name</td>
+	      <td><%= li_me['first_name'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Last Name</td>
+	      <td><%= li_me['last_name'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Formatted Name</td>
+	      <td><%= li_me['formatted_name'] %> </td>
+	    </tr>
+	    <% if li_me['headline'] %>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Headline</td>
+	      <td><%= li_me['headline'] %> </td>
+	    </tr>
+	    <% end %>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>ID</td>
+	      <td><%= li_me['id'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Email Address</td>
+	      <td><%= li_me['email_address'] %> </td>
+	    </tr>
+	    <% if li_me['industry'] %>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Industry</td>
+	      <td><%= li_me['industry'] %> </td>
+	    </tr>
+	    <% end %>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Locations</td>
+	      <td>
+	      		<%= li_me['location']['name'] %> 
+	      </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>No. of Connections</td>
+	      <td><%= li_me['num_connections'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Phone No's</td>
+	      <td>
+	      		<% if li_me['phone_numbers']['total'] > 0 %>
+	   				<% li_me['phone_numbers']['all'].each do |f| %>
+	   					<%= f['phone_type'] %> - <%= f['phone_number'] %><br>
+   					<% end %>
+   				<% end %>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Public Profile URL</td>
+	      <td><%= link_to truncate(li_me['public_profile_url'],:length => 40),li_me['public_profile_url'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Site Standard Profile Request</td>
+	      <td><%= link_to truncate(li_me['site_standard_profile_request']['url'],:length => 40),li_me['site_standard_profile_request']['url'] %> </td>
+	    </tr>
+	     <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Last Modified at</td>
+	      <td><%= Time.at(li_me['last_modified_timestamp']) %> </td>
+	    </tr>
+	    <tr>
+		      <td><%= i+=1 %></td>
+			  <td>Positions</td>
+			  <td style="text-align:left">
+			  		<% if li_me['positions']['total'] > 0 %>
+			  			<% n=0 %> 
+		    			<% li_me['positions']['all'].each do |f|%>
+			    			<small>(<%= n+=1 %>.)</small>
+			    			Title :  <i><%= f['title'] %></i><br>
+			    			Summary :  <i><%= f['summary'] %></i><br>		    			
+			    			Company Name :  <i><%= f['company']['name'] %></i><br>
+			    			Company Industry :  <i><%= f['company']['industry'] %></i><br>
+			    			Start Date :  <i><%= f['start_date']['month'] %>,<%= f['start_date']['year'] %></i><br>
+			    			Working Currently :  <i><%= f['is_current'] %></i><br><br>
+				  		<% end %>
+			  		<% end %>
+			  </td>					
+		</tr>	
+
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Skills</td>
+	      <td>
+	      		<% if li_me['skills']['total'] > 0 %>
+	      			<% li_me['skills']['all'].each do |f| %> 
+	      				<small><%= f['skill']['name']%>, </small>
+	      			<% end %>
+	      		<% end %>
+	      </td>
+	    </tr>
+
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Education</td>
+	      <% n=0 %>
+	      <td style="text-align:left">
+	      		<% if li_me['educations']['total'] > 0 %>
+		      		<% li_me['educations']['all'].each do |f| %> 
+			      		<small>(<%= n+=1 %>.)</small>
+			      		Degree : <i><%= f['degree'] %> (<%= f['field_of_study'] %>)</i><br>
+			      		School : <i><%= f['school_name'] %></i><br>
+			      		<i><%= f['start_date']['year'] %> <small>to</small> <i><%= f['end_date']['year'] %></i><br>
+		      		<% end %>
+	      		<% end %>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Related Profile Views</td>
+	     
+	      <td>
+	      		<% if li_me['related_profile_views']['total'] > 0 %>
+		      		<% li_me['related_profile_views']['all'].each do |f| %> 
+			      		<%= f['first_name']%> <%= f['last_name']%>,
+			      	<% end %>
+	      		<% end %>
+	      </td>
+	    </tr>
+
+ 
+	</table>
+</div>
+
+<% end %>
+

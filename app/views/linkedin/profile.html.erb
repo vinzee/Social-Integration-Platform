@@ -1,0 +1,40 @@
+
+<% if @li %>
+
+<!-- ----------------------------------- Profile ----------------------------------------- -->
+
+	<ul class="row-fluid">
+		<li class="span1">
+			<% li_pic = @li.picture_urls %>
+			
+			<% if li_pic %>
+				<%= image_tag(li_pic.all.first, :class =>'img-polaroid img-small') %>
+			<% else %>
+				<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+		    <% end %>
+		</li>
+	
+		<li class="span11">
+			<% li_me = @li.profile(:fields => [:id,:first_name, :last_name , :formatted_name ,:headline,:location,:industry,:current_share,:summary,:picture_url,:associations, :honors, :interests,:positions,:educations,:public_profile_url,:site_standard_profile_request,:specialties,:num_connections,:email_address,:publications,:patents,:skills,:certifications,:date_of_birth,:phone_numbers,:job_bookmarks,:following,:suggestions,:last_modified_timestamp,:recommendations_received,:related_profile_views,:honors_awards,:main_address]) %>
+
+			<% li_me = li_me.to_hash %>
+				<ul class="row-fluid">
+					<li class="span5">			 
+					    <b><%= li_me['formatted_name'] %></b><br>
+					    <i><%= li_me['headline'] %></i><br>	    					    
+					    <i><%= li_me['industry'] %></i><br>
+					    <%= li_me['location']['name'] %><br>
+					</li>
+					<li class="span4">
+						<b>Email ID : </b> <%= li_me['email_address'] %><br>	
+						<b>Friends:</b> <%= li_me['num_connections'] %><br>		    
+			    	</li>
+					<li class="span3">
+						 <%= link_to 'Public Profile',li_me['public_profile_url'],:target =>'blank' %><br>
+					    <%= link_to 'Private Profile',li_me['site_standard_profile_request']['url'],:target =>'blank' %> <br>	    
+				    </li>
+				</ul>
+			<% end %>
+	    </li>
+	</ul>
+

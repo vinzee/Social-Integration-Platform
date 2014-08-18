@@ -1,0 +1,63 @@
+<div class="page-header">
+  <h1> Social Accounts  <small> Information and Settings </small></h1>
+</div>
+
+
+
+<br><br>
+
+<div class="row-fluid">
+<div class="span10 offset1">
+<table class="table">
+  <tr>
+    <th>Provider</th>
+    <th>Expires In</th>
+  </tr>
+  <% for authentication in @authentications %>
+    <tr>
+      <td><%= authentication.provider %></td>
+      <td>
+         <% if authentication.provider == 'facebook'%>
+            <%= distance_of_time_in_words_to_now(authentication.updated_at + 2.months) %>
+         <% elsif authentication.provider == 'twitter' %>
+              Never
+         <% elsif authentication.provider == 'linkedin' %>
+            <%= distance_of_time_in_words_to_now(authentication.updated_at + 2.months) %>
+         <% end %>
+      </td>
+      <td>
+      <%= link_to "Delete", authentication, :confirm => 'Are you sure?', :method => :delete,:id => @authentication_id, :class => 'btn btn-danger btn-small' %>
+      </td>
+      <td>
+      <% if authentication.provider == 'facebook'%>
+      <%= link_to "Sign Out", authentication, :confirm => 'Are you sure?', :method => :delete,:id => @authentication_id, :class => 'btn btn-warning btn-small' %>
+      <% elsif authentication.provider == 'twitter' %>
+      <%= link_to "Sign Out", authentication, :confirm => 'Are you sure?', :method => :delete,:id => authentication.id , :class => 'btn btn-warning btn-small' %>
+      <% elsif authentication.provider == 'linkedin' %>
+      <%= link_to "Sign Out", authentication, :confirm => 'Are you sure?', :method => :delete,:id => @authentication_id, :class => 'btn btn-warning btn-small' %>
+      <% end %>
+      </td>
+      <td>
+      <% if authentication.provider == 'facebook'%>
+        <%= link_to "Refresh", "/auth/facebook",:class => 'btn btn-success btn-small' %>
+      <% elsif authentication.provider == 'twitter' %>
+        <%= link_to "Refresh", "/auth/twitter",:class => 'btn btn-success btn-small' %>
+      <% elsif authentication.provider == 'linkedin' %>
+        <%= link_to "Refresh", "/auth/linkedin",:class => 'btn btn-success btn-small' %>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+</div>
+</div>
+
+<br><br>
+
+<% if current_user %>
+
+      <%=  link_to "Sign in with Facebook", "/auth/facebook" %><br>
+      <%= link_to "Sign in with Twitter", "/auth/twitter" %><br>
+      <%=  link_to "Sign in with Linkedin", "/auth/linkedin" %><br>
+   
+<% end %>

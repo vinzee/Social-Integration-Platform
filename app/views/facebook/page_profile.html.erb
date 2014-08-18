@@ -1,0 +1,46 @@
+<% if @fb_page %>
+
+ <!-- ---------------------------------Pages profile----------------------------------------- -->
+ <h4> Pages : </h4>
+ <% pro_me = @fb_page.get_object("me") %><br><br>
+<div class="row-fluid box">
+	<div class="span9">
+		<center>
+<%= image_tag(@fb_page.get_picture("me",:type =>'large'), :alt => "profile image", :width => 500, :height => 500,:class =>'img-polaroid') %>
+		</center>
+	</div>
+
+	<div class="span3">
+		<br><br><br>
+		<%= link_to pro_me['name'], pro_me['link'] %>
+		<br><br>
+		<%= link_to truncate(pro_me['website'],:length => 40), pro_me['website']%><br><br>
+	</div>
+
+</div><br><br>
+
+<div class="row-fluid box">
+	<div class="span5 offset1">
+		<b class="text-info">About: </b><i><%= pro_me['about'] %></i><br><br>
+		
+		<b class="text-info">Category: </b><i><%= pro_me['category'] %></i><br><br>
+		<b class="text-info">Likes: </b><%= pro_me['likes'] %><br><br>
+		<b class="text-info">New Like Count: </b><%= pro_me['new_like_count'] %><br><br>
+		<% if pro_me['promotion_ineligible_reason'] %>
+				<b class="text-info">Promotion Ineligible Reason: </b><small><%= pro_me['promotion_ineligible_reason'] %></small><br><br>
+		<% end %>
+	</div>
+
+	
+			
+	<div class="span5">
+			<b class="text-info">Is Published: </b><i><%= pro_me['is_published'] %></i><br><br>
+			<b class="text-info">Can Post: </b><i><%= pro_me['can_post'] %></i><br><br>
+			<b class="text-info">Talking About Count: </b><%= pro_me['talking_about_count'] %><br><br>
+			<b class="text-info">Unread Message Count: </b><%= pro_me['unread_message_count'] %><br><br>
+			<b class="text-info">Unread notification count: </b><%= pro_me['unread_notif_count'] %><br><br>
+			<b class="text-info">Unseen Message Count: </b><%= pro_me['unseen_message_count'] %><br><br>
+	</div>
+
+</div>
+ <% end %>

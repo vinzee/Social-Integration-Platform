@@ -1,0 +1,141 @@
+<% if @li %>
+
+		<!-- ----------------------------------- Company ----------------------------------------- -->
+
+		<h5> Company : </h5>
+
+		
+
+		<% li_con = @li.company(:id => @id, :fields =>[:id,:name,:universal_name,:email_domains,:company_type,:ticker,:website_url,:industries,:status,:logo_url,:blog_rss_url,:employee_count_range,:specialties,:locations,:description,:stock_exchange,:founded_year,:end_year,:num_followers]) %>
+
+
+		<% li_con = li_con.to_hash %>
+
+		<% if li_con['logo_url'] %>
+		<div class="offset2">
+			<%= image_tag(li_con['logo_url'],:class => 'img-polaroid')%><br><br><br>
+		</div>
+		<% end %>
+
+		<div class="row-fluid">
+		<div class="span10">
+			<table class="table">
+				<% i = 0 %>
+			  <tr>
+			    <th class="span2" >Sr.No.</th>
+			    <th class="span3" >Name</th>
+			    <th class="span7" >Value</th>
+			  </tr>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Name</td>
+			      <td><%= li_con['name'] %> </td>
+			    </tr>
+			    <% if li_con['company_type'] %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Company Type</td>
+			      <td>	
+			      			Code : <%= li_con['company_type']['code'] %><br>
+			      	  		Name : <%= li_con['company_type']['name'] %><br>		      		
+			      </td>
+			    </tr>
+			    <% end %>
+			    <% if li_con['founded_year'] %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Founded Year</td>
+			      <td><%= li_con['founded_year'] %> </td>
+			    </tr>
+			    <% end %>
+			    <% if li_con['locations']  %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Locations</td>
+			      <td>	
+			      			<% li_con['locations']['all'].each do |f| %> 
+			      				Address : <% f['address'].each do |a,b| %> 
+			      				<%= b %>, 
+			      				<% end %><br>
+			      				Contact : <%= f['contact_info']['phone1'] %> <br><br>
+			      			<% end %>		      		
+			      </td>
+			    </tr>
+			    <% end %>
+			    <% if li_con['description'] %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Description</td>
+			      <td><small><%= li_con['description'] %></small> </td>
+			    </tr>
+			    <% end %>
+			    <% if li_con['specialties'] %> 
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Specialities</td>
+			      <td>
+		      		   <% li_con['specialties']['all'].each do |f| %>
+		      		   		<%= f %>,
+	      		   		<% end %>		
+			      </td>
+			    </tr>
+			    <% end %>
+			    <% if li_con['industries'] %> 
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Industries</td>
+			      <td> 	
+		      		   <% li_con['industries']['all'].each do |f| %>
+		      		   		<%= f['name'] %>(<%= f['code'] %>),
+	      		   		<% end %>		 
+			      </td>
+			    </tr>
+			    <% end %>
+			     <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Number of Followers</td>
+			      <td><%= li_con['num_followers'] %> </td>
+			    </tr>
+			    <% if li_con['employee_count_range'] %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Employee Count Range</td>
+			      <td><%= li_con['employee_count_range']['name'] %>(<%= li_con['employee_count_range']['code'] %>) </td>
+			    </tr>
+			    <% end %>
+			    <% if li_con['status'] %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Status</td>
+			      <td><%= li_con['status']['name'] %>(<%= li_con['status']['code'] %>) </td>
+			    </tr>
+			    <% end %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Universal Name</td>
+			      <td><%= li_con['universal_name'] %> </td>
+			    </tr>
+			    <% if li_con['website_url'] %>
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Website URL</td>
+			      <td><%= link_to li_con['website_url'],li_con['website_url'] %> </td>
+			    </tr>
+			    <% end %>
+			    <% if li_con['email_domains'] %> 
+			    <tr>
+			      <td><%= i+=1 %></td>
+			      <td>Email Domains</td>
+			      <td>
+			      		<% li_con['email_domains']['all'].each do |f| %>
+			      			<%= f %>,
+			      		<% end %>
+			      </td>
+			    </tr>
+			    <% end %>
+			    </table>
+		</div>
+		</div>
+
+
+<% end %>

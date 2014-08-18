@@ -1,0 +1,9 @@
+
+iframe {border: none; }
+.line {border-bottom: 5px double #eeeeee; margin-top: -22px; padding-top: 8px; padding-bottom: 4px;}
+.pos {margin-top: 5px;}
+.brdr {border: 1px solid #ddd; margin-top: 15px; min-height:520px}
+.tabs {height: 43px; background: #f1f1f1; padding-left: 25px; margin-left: -26px; margin-top: -25px;}
+.side {width: 10%; margin-top: 150px; margin-left: 10px;}
+.pos .active a {font-weight: bold;font-size: 14px;}
+.nav-stacked .active a, .nav-stacked .active a:hover {font-size: 14px; background : #0088cc; color: white; }

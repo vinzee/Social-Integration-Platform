@@ -1,0 +1,107 @@
+<% if @li %>
+
+		<% if !@page %>
+			<% @page = 0 %>
+		<% end %> 
+
+
+		<% if @page == '0' %>
+			<!-- ----------------------------------- Group Status Update ----------------------------------------- -->
+
+			<h4><small>Group Share :</small></h4>
+
+			<%= form_tag( :action => 'post' ) do  %>
+			<ul>
+		      <li class='span4 offset2'><%= text_area_tag :msg, nil,:length => '100'  %></li>
+		      <%= hidden_field_tag 'type', 'group' %>
+		      <%= hidden_field_tag 'id', '@group_id'%>
+		      <li class='span3'><br><%= submit_tag "Post", class: "btn btn-primary" %></li>
+		    </ul>  
+		    <% end %>
+	    <% end %>
+
+	    <br><br>
+
+	    <% if @page == '0' %>
+			<!-- ----------------------------------- post_group_discussion ----------------------------------------- -->
+
+			<h4><small>Group Discussions :</small></h4>
+
+			<%= form_tag( :action => 'post' ) do  %>
+			<ul>
+		      <li class='span4 offset2'><%= text_area_tag :msg, nil,:length => '100'  %></li>
+		      <%= hidden_field_tag 'type', 'group_discussion' %>
+		      <%= hidden_field_tag 'id', '@group_id'%>
+		      <li class='span3'><br><%= submit_tag "Post", class: "btn btn-primary" %></li>
+		    </ul>  
+		    <% end %>
+	    <% end %>
+
+	    <br><br>
+		
+		<!-- ----------------------------------- Group Wall Feed (Posts) ----------------------------------------- -->
+
+		<h2> Group Posts <small>info</small> </h2><br>
+
+		<%   li_wall = @li.group_posts(:id => @group_id,:start => @page,:limit => 10) %>
+
+		Number of Posts: <%= li_wall._count %><br>
+
+		<% if li_wall._start %>
+				<%= li_wall._start + 1%>
+		  <% else %>
+					0
+		  <% end %>
+		  
+		   of <%= li_wall.total %> Pages<br>
+
+		<br><br>
+
+		<% li_wall.all.each do |f| %>
+		<% f =  f.to_hash %>
+		<% cr = f['creator'] %>
+		<%# f['id'] %>
+		<div class="row box">
+			<div class="span2">
+				<% if cr['picture_url'] %>
+					<%= image_tag(cr['picture_url'], class: 'img-polaroid img-small') %><br>
+				<% else %>
+					<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid img-small' %><br>
+				<% end %>
+			</div>
+			<div class="span5">
+				<b><%= cr['first_name'] %> <%= cr['last_name'] %></b><br>
+			<i><%= cr['headline'] %></i><br>
+			</div>
+			<div class="span5">
+			
+			<small>Title :</small><i><%= f['title'] %></i><br>
+			<small>Type :</small><i><%= f['type']['code'] %></i><br><br>
+			</div>
+		</div>
+			
+			
+			
+			
+			
+			
+		<% end %>
+
+		<% if li_wall._start %>
+		<ul class="pager">
+		  <li>
+		  	<% if li_wall._start > 0 %>
+ 				<%= link_to "Previous Page", {:controller => 'linkedin',:action => 'group_feed',:id => @group_id,:page => li_wall._start - 10}  %>
+ 			<% end %>
+ 		  </li>
+		  <li>
+		  	<% if li_wall._start < li_wall._count %>
+ 				<%= link_to "Next Page", {:controller => 'linkedin',:action => 'group_feed',:id => @group_id,:page => li_wall._start + 10} %>
+		 	<% end %>
+		 </li>
+		</ul>
+		<% end %>
+
+ 		<br><br>
+		
+<% end %>

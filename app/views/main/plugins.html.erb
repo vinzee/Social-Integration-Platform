@@ -1,0 +1,763 @@
+
+
+<div class="tabbable">		
+	<div class="row-fluid">
+		<div class="span2">
+			<div class="affix" style="width: 11%; margin-top: 20px;">
+				<div class="accordion" id="accordion">
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+				        <h4> Smart Layer</h4>
+				      </a>
+				    </div>
+				    <div id="collapseFour" class="accordion-body collapse in">
+				      <div class="accordion-inner">
+				      	<ul class="nav nav-tabs ">
+				      	 	<table class="table">
+			                    <tr>
+			                        <td>
+			                            <a href="#smart_layer" data-toggle="tab"> Smart Layer </a>
+			                        </td>
+			                    </tr>
+			                </table>
+			            </ul>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+				        <h4> Facebook </h4>
+				      </a>
+				    </div>
+				    <div id="collapseOne" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				      	<ul class="nav nav-tabs ">
+				      	 	<table class="table">
+			                    <tr>
+			                        <td>
+			                            <a href="#fb_share_link" data-toggle="tab"> Share </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                            <a href="#fb_like_link" data-toggle="tab"> Like </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                            <a href="#fb_follow_link" data-toggle="tab"> Follow </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                             <a href="#fb_send_link" data-toggle="tab"> Send </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                             <a href="#fb_comment_link" data-toggle="tab"> Comment </a>
+			                        </td>
+			                    </tr>
+			                </table>
+			            </ul>
+				      </div>
+				    </div>
+				  </div>
+
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+				         <h4> Twitter </h4>
+				      </a>
+				    </div>
+				    <div id="collapseTwo" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				      	<ul class="nav nav-tabs ">
+				        	<table class="table">
+			                    <tr>
+			                        <td>
+			                            <a href="#tw_share_link" data-toggle="tab"> Share </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                            <a href="#tw_follow_link" data-toggle="tab"> Follow </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                            <a href="#tw_hashtag_link" data-toggle="tab"> Hashtag </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                             <a href="#tw_mention_link" data-toggle="tab"> Mention </a>
+			                        </td>
+			                    </tr>
+			                </table>
+			            </ul>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+				         <h4> LinkedIn </h4>
+				      </a>
+				    </div>
+				    <div id="collapseThree" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				      	<ul class="nav nav-tabs ">
+				        	<table class="table">
+			                    <tr>
+			                        <td>
+			                            <a href="#ln_share_link" data-toggle="tab"> Share </a>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <td>
+			                            <a href="#ln_member_profile_link" data-toggle="tab"> Member Profile </a>
+			                        </td>
+			                    </tr>
+			                </table>
+			            </ul>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+
+		<div class="span10">
+		    <div class="tab-content">
+		    	<div id="smart_layer" class="tab-pane active">
+		    		<div class="page-header">
+		          		<h3> Smart Layer</h3>
+		          	</div>
+		          	<div class="well">
+		          			<div class="form-horizontal" style="margin-left: 0px;">
+		          				<h4>Share : </h4>
+			          			<div class="control-group">
+								    <div>
+								      	<label class="checkbox">
+								      		<input type="checkbox" id="fb_share_ch"> Facebook   
+								      	</label>
+								      	<label class="checkbox">
+								      		<input type="checkbox" id="tw_share_ch"> Twitter    
+								      	</label>
+								      	<label class="checkbox">
+								      		<input type="checkbox" id="ln_share_ch"> Linkedin 
+								      	</label>
+								    </div>  
+								</div>
+
+								<h4> Follow : </h4>
+								<div class="control-group">
+									<div class="control-label" style="width: initial;">
+										<label class="checkbox">
+								      		<input type="checkbox" id="fb_follow_ch"> Facebook
+								      	</label>
+								    </div>
+						      		<div class="controls">
+						      			<input type="text" id="fb_follow_text" placeholder="Facebook UserID">
+						      		</div>
+
+						      		<div class="control-label" style="width: initial;">
+							      		<label class="checkbox">
+								      		<input type="checkbox" id="tw_follow_ch"> Twitter
+								      	</label>
+								    </div>
+						      		<div class="controls">
+						      			<input type="text" id="tw_follow_text" placeholder="Twitter UserID">
+						      		</div>
+
+						      		<div class="control-label" style="width: initial;">
+							      		<label class="checkbox">
+								      		<input type="checkbox" id="ln_follow_ch"> Linkedin
+								      	</label>
+								    </div>
+						      		<div class="controls">
+						      			<input type="text" id="ln_follow_text" placeholder="LinkedIn UserID">
+						      		</div>						    
+								</div>
+								<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="smart_layer()"> Generate </button>
+							</div>
+		          	</div>
+		    	</div>
+
+	   			<div id="fb_share_link" class="tab-pane">
+
+			  	  <div class="page-header">
+		          	<h3> Facebook Share</h3>
+		          </div>
+		          <p>The Share button lets people add a personalized message to links before sharing on their timeline, in groups, or to their friends.</p>
+		          <br>
+		          <div class=" well">
+		          <div class="row-fluid">
+		          <ul>
+		          	<li class="span7">
+		          		<div class="form-horizontal">
+							  <div class="control-group">
+							    <label class="control-label">URL To Share: </label>
+							    <div class="controls">
+							      	<input type="text" id="fb_share" placeholder="URL To Share"> 
+							      	<p style="font-size: 12px; color: grey;">OPTIONAL (URL should be in form of : http://www.example.com)</p>
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <label class="control-label">Layout:</label>
+							    <div class="controls">
+							    	<label class="radio">
+							      		<input type="radio" name="r1" id="share_button"> Button    
+							      	</label>
+							      	<label class="radio">
+							      		<input type="radio" name="r1" id="share_button-count"> Button Count  
+							    	</label>
+							    	<label class="radio">
+							      		<input type="radio" name="r1" id="share_box-count"> Box Count
+							    	</label>
+							    	<label class="radio">
+							      		<input type="radio" name="r1" id="share_icon"> Icon    
+							      	</label>
+							      	<label class="radio">
+							      		<input type="radio" name="r1" id="share_link"> Link   
+							    	</label>
+							    	<label class="radio">
+							      		<input type="radio" name="r1" id="share_icon-link"> Icon-Link  
+							    	</label>
+							    </div>
+							  </div>
+		          		</div>
+		          	</li>
+		          	<li class="span5">
+		          	</li>
+		          </ul>
+		          </div><br />
+				  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="fb_getcode_share()"> Get Code </button>
+				  </div>
+				</div>
+				 
+				<div id="fb_like_link" class="tab-pane">
+				  <div class="page-header">
+		          	<h3> Facebook Like</h3>
+		          </div>
+		          <p>The Like button is the quickest way for people to share content with their friends.</p>
+		          <br>
+		          <div class=" well">
+		          <div class="row-fluid">
+		          <ul>
+		          	<li class="span7">
+		          		<div class="form-horizontal">
+							  <div class="control-group">
+							    <label class="control-label">URL To Like: </label>
+							    <div class="controls">
+							      	<input type="text" id="fb_like" placeholder="URL To Like"> 
+							      	<p style="font-size: 12px; color: grey;">(URL should be in form of : http://www.example.com)</p>
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <label class="control-label">Layout:</label>
+							    <div class="controls">
+							    	<label class="radio">
+							      		<input type="radio" name="r2" id="like_button"> Button     
+							      	</label>
+							      	<label class="radio">
+							      		<input type="radio" name="r2" id="like_button-count"> Button Count   
+							    	</label>
+							    	<label class="radio">
+							      		<input type="radio" name="r2" id="like_box-count"> Box Count 
+							    	</label>
+							    </div>
+							  </div>
+		          		</div>
+		          	</li>
+		          	<li class="span5">
+		          	</li>
+		          </ul>
+				  </div><br />
+				
+				  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="fb_getcode_like()"> Get Code </button>
+				  </div>
+				</div>			  
+				  
+				<div id="fb_follow_link" class="tab-pane">
+				  <div class="page-header">
+		          	<h3> Facebook Follow</h3>
+		          </div>
+		          <p>The Follow button lets people subscribe to the public updates of others on Facebook.</p>
+		          <br>
+		          <div class=" well">
+		          <div class="row-fluid">
+		          <ul>
+		          	<li class="span7">
+		          		<div class="form-horizontal">
+							  <div class="control-group">
+							    <label class="control-label">Profile URL: </label>
+							    <div class="controls">
+							    	<div class="input-prepend">
+			  							<span class="add-on">http://www.facebook.com/</span>
+						      			<input type="text" class="span7" id="fb_follow" placeholder="Profile URL">
+							      	</div>
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <label class="control-label">Layout:</label>
+							    <div class="controls">
+							    	<label class="radio">
+							      		<input type="radio" name="r3" id="follow_button"  > Button   
+							      	</label>
+							      	<label class="radio">
+							      		<input type="radio" name="r3" id="follow_button-count"> Button Count
+							    	</label>
+							    	<label class="radio">
+							      		<input type="radio" name="r3" id="follow_box-count"> Box Count 
+							    	</label>
+							    </div>
+							  </div>
+		          		</div>
+		          	</li>
+		          	<li class="span5">
+		          	</li>
+		          </ul>  
+				  </div><br />
+				  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="fb_getcode_follow()"> Get Code </button>
+				  </div>
+				</div>
+				  
+				<div id="fb_send_link" class="tab-pane">
+				  <div class="page-header">
+		          	<h3> Facebook Send Button</h3>
+		          </div>
+		          <p>The Send button lets people privately send content on your site to one or more friends in a Facebook message, to an email address, or share it with a Facebook group.</p>
+		          <br>
+		          <div class=" well">
+		          		<div class="form-horizontal" style="margin-left: 40px">
+							  <div class="control-group">
+							    <label class="control-label">URL to Send: </label>
+							    <div class="controls">
+							    	<input type="text" id="fb_send" placeholder="URL To Send"> 
+							    	<p style="font-size: 12px; color: grey;">(URL should be in form of : http://www.example.com)</p>
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <div class="controls">
+							    	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="fb_getcode_send()"> Get Code </button>
+							    </div>
+							  </div>
+		          		</div>
+				  </div>
+				</div>			  
+
+				<div id="fb_comment_link" class="tab-pane">
+				  <div class="page-header">
+		          	<h3> Facebook Comments</h3>
+		          </div>
+		          <p>The Comments box lets people comment on content on your site using their Facebook profile and shows this activity to their friends in news feed. It also contains built-in moderation tools and special social relevance ranking.</p>
+		          <br>
+		          <div class=" well">
+		          		<div class="form-horizontal" style="margin-left: 40px">
+							  <div class="control-group">
+							    <label class="control-label">URL To Comment On: </label>
+							    <div class="controls">
+							    	<input type="text"  id="fb_comment" placeholder="URL To Comment On"> 
+							    	<p style="font-size: 12px; color: grey;">(URL should be in form of : http://www.example.com)</p>
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <label class="control-label">Number of posts: </label>
+							    <div class="controls">
+							    	<input type="text"  id="fb_numposts" placeholder="Number">
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <div class="controls">
+							    	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="fb_getcode_comment()"> Get Code </button>
+							    </div>
+							  </div>
+		          		</div>
+		          </div>
+				</div>
+
+
+
+				<div id="tw_share_link" class="tab-pane">
+					<div class="page-header">
+				    	<h3> Twitter Share</h3>
+				    </div>
+				    <div class=" well" >
+				    	<div class="row-fluid">
+				          <ul>
+				            <li class="span8">
+								<div class="form-horizontal">
+								  <div class="control-group">
+								    <label class="control-label">Share URL: </label>
+								    <div class="controls">
+								    	 <label class="radio">
+								      		<input type="radio" name="r4" id="share_data_url_1"  > Use the page URL
+								      	 </label>
+								      	 <label class="radio">
+								      	 	<input type="radio" name="r4" id="share_data_url_2"> <input type="text" id="share_data_url" placeholder="http://" value="http://" disabled="true">
+								   		 </label>
+								    </div>
+								  </div>
+								  <div class="control-group">
+								    <label class="control-label">Tweet text:</label>
+								    <div class="controls">
+								    	<label class="radio">
+								      		<input type="radio" name="r5" id="share_data_text_1"  > Use the title of the page<br />
+								      	</label>
+								      	<label class="radio">
+								      		<input type="radio" name="r5" id="share_data_text_2"> <input type="text" id="share_data_text" placeholder="Check out this site" disabled="true">
+								    	</label>
+								    </div>
+								  </div>
+								  <div class="control-group">
+								    <div class="controls">
+								      <label class="checkbox">
+								        <input type="checkbox" id="share_show_count" checked="=true" />Show Count
+								      </label>				      
+								    </div>
+								  </div>
+								  <div class="control-group">
+								    <label class="control-label">Via:</label>
+								    <div class="controls">
+								    	<div class="input-prepend">
+			  								<span class="add-on">@</span>
+								      		<input type="text" id="share_via" placeholder="username">
+								      	</div>
+								  </div>		  
+								</div>      	
+					              <div class="control-group">
+								    <label class="control-label">Recommends:</label>
+								    <div class="controls">
+								    	<div class="input-prepend">
+			  								<span class="add-on">@</span>
+								      		<input type="text" id="share_rec" placeholder="username">
+								      	</div>		      
+								  </div>   
+					          	 </div>              
+					              <div class="control-group">
+								    <label class="control-label">Hashtag:</label>
+								    <div class="controls">
+								    	<div class="input-prepend">
+			  								<span class="add-on">#</span>
+								      		<input type="text" id="share_hash" placeholder="hashtag">
+								      	</div>					      
+								  	</div>
+								  </div>             
+				          		  <div class="control-group">
+								    <div class="controls">
+								      <label class="checkbox">
+								        <input type="checkbox" id="share_l_button"/> Large Button
+								      </label>	  
+								      <label class="checkbox">
+								        <input type="checkbox" id="share_opt" /> Opt-out of tailoring Twitter
+								      </label>    
+								    </div>
+								  </div>
+								</div>
+							</li>
+				          	<li class="span4">
+				          	</li>
+				          </ul>
+						</div>		 
+					  	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="tw_getcode_share()"> Get Code </button>
+					</div>
+				</div>
+					
+				<div id="tw_follow_link" class="tab-pane">
+					 <div class="page-header">
+			          	<h3> Twitter Follow</h3>
+			          </div>
+			          <div class=" well">
+			            <div class="row-fluid">
+				          <ul>
+				            <li class="span7">
+				            	<div class="form-horizontal">
+									  <div class="control-group">
+									    <label class="control-label">Username: </label>
+									    <div class="controls">
+									    	 <div class="input-prepend">
+				  								<span class="add-on">@</span>
+									      		<input type="text" id="follow_user_name" placeholder="username">
+									      	</div>	
+									    </div>
+									  </div>           
+					          		  <div class="control-group">
+									    <div class="controls">
+									      <label class="checkbox">
+									        <input type="checkbox" id="follow_uname"/> Show User-name
+									      </label>	 
+									      <label class="checkbox">
+									        <input type="checkbox" id="follow_l_button"/> Large Button
+									      </label>	  
+									      <label class="checkbox">
+									        <input type="checkbox" id="follow_opt" /> Opt-out of tailoring Twitter
+									      </label>    
+									    </div>
+									  </div>
+									</div>
+				            </li>
+				            <li class="span5">
+				                         
+				            </li>
+				          </ul>
+					  </div>
+					  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="tw_getcode_follow()"> Get Code </button>
+					  </div>  
+				</div>
+					
+				<div id="tw_hashtag_link" class="tab-pane">
+					  <div class="page-header">
+			          	<h3> Twitter HashTag</h3>
+			          </div>
+			          <div class=" well">
+			          	<div class="row-fluid">
+					          <ul>
+					            <li class="span7">
+					            	<div class="form-horizontal">
+										  <div class="control-group">
+										    <label class="control-label">Hashtag: </label>
+										    <div class="controls">
+										    	<div class="input-prepend">
+					  								<span class="add-on">#</span>
+										      		<input type="text" id="hash_hashtag" placeholder="Tweet Stories">
+										      	</div>	
+										    </div>
+										  </div>
+										  <div class="control-group">
+										    <label class="control-label">Tweet text:</label>
+										    <div class="controls">
+										    	<label class="radio">
+										      		<input type="radio" name="r6" id="hash_text_1"  >  No Default Text</br>
+										      	</label>
+										      	<label class="radio">
+										      		<input type="radio" name="r6" id="hash_text_2">  <input type="text" id="hash_text" placeholder="Check out this site" disabled="true">
+										    	</label>
+										    </div>
+										  </div>
+										  <div class="control-group">
+										  	<label class="control-label"> Recommend: </label>
+										    <div class="controls">
+										    	<label>
+										    		<div class="input-prepend">
+					  									<span class="add-on">@</span>
+										      			<input type="text" id="hash_rec1" placeholder="username">
+										      		</div>
+										      	</label>
+										      	<label>
+										      		<div class="input-prepend">
+						  								<span class="add-on">@</span>
+											      		<input type="text" id="hash_rec2" placeholder="username">
+											      	</div>         
+										    	</label>
+										    </div>
+										  </div>
+										  <div class="control-group">
+										  	<label class="control-label"> URL: </label>
+										    <div class="controls">
+										    	<label class="radio">
+										      		<input type="radio" name="r7" id="hash_data_url_1"  > No URL
+										      	</label>
+										      	<label class="radio">
+										      		 <input type="radio" name="r7" id="hash_data_url_2"> <input type="text" id="hash_data_url" placeholder="http://" value="http://" disabled="true">        
+										    	</label>
+										    </div>
+										  </div>
+						          		  <div class="control-group">
+										    <div class="controls">
+										      <label class="checkbox">
+										        <input type="checkbox" id="hash_l_button"/> Large Button
+										      </label>	  
+										      <label class="checkbox">
+										        <input type="checkbox" id="hash_opt" /> Opt-out of tailoring Twitter
+										      </label>    
+										    </div>
+										  </div>
+										</div>           
+					            </li>
+					            <li class="span5">
+					                       
+					            </li>
+					          </ul>
+					  	</div>
+					  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="tw_getcode_hashtag()"> Get Code </button>
+					  </div>
+				</div>
+					  
+				<div id="tw_mention_link" class="tab-pane">
+					  <div class="page-header">
+			          	<h3> Twitter Mention</h3>
+			          </div>
+			          <div class=" well">
+				          <div class="row-fluid">
+					          <ul>
+					            <li class="span7">
+					            	<div class="form-horizontal">
+										  <div class="control-group">
+										    <label class="control-label">Tweet To: </label>
+										    <div class="controls">
+										    	<div class="input-prepend">
+					  								<span class="add-on">@</span>
+										      		<input type="text" id="mention_tweet" placeholder="support"></br>
+										      	</div>	
+										    </div>
+										  </div>
+										  <div class="control-group">
+										    <label class="control-label">Tweet text:</label>
+										    <div class="controls">
+										    	<label class="radio">
+										      		<input type="radio" name="r8" id="mention_text_1"  > No Default Text           
+										      	</label>
+										      	<label class="radio">
+										      		<input type="radio" name="r8" id="mention_text_2"> <input type="text" id="mention_text" placeholder="I think that.." disabled="true">
+										    	</label>
+										    </div>
+										  </div>
+										  <div class="control-group">
+										  	<label class="control-label">Recommend:</label>
+										    <div class="controls">
+										    	<label>
+										    		<div class="input-prepend">
+					  									<span class="add-on">@</span>
+										      			<input type="text" id="mention_rec1" placeholder="username">
+										      		</div>
+										      	</label>
+										      	<label>
+										      		<div class="input-prepend">
+						  								<span class="add-on">@</span>
+											      		<input type="text" id="mention_rec2" placeholder="username">
+											      	</div>         
+										    	</label>
+										    </div>
+										  </div>
+						          		  <div class="control-group">
+										    <div class="controls">
+										      <label class="checkbox">
+										        <input type="checkbox" id="mention_l_button"/> Large Button
+										      </label>	  
+										      <label class="checkbox">
+										        <input type="checkbox" id="mention_opt" /> Opt-out of tailoring Twitter
+										      </label>    
+										    </div>
+										  </div>
+										</div>
+					            </li>
+					            <li class="span5">
+					                    
+					            </li>
+					          </ul>
+						  </div>
+					  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="tw_getcode_mention()"> Get Code </button>
+					  </div>
+				</div>
+
+
+
+
+				<div id="ln_share_link" class="tab-pane">
+				  <div class="page-header">
+		          	<h3> Linkedin Share</h3>
+		          </div>
+		          <p>Enable users to share your website with LinkedIn’s professional audience, and drive traffic back to your site.</p>
+		          <br>
+		          <div class=" well">
+		          <div class="row-fluid">
+		          <ul>
+		          	<li class="span7">
+		          		<div class="form-horizontal">
+							  <div class="control-group">
+							    <label class="control-label">URL To Share: </label>
+							    <div class="controls">
+							      	<input type="text" id="ln_share" placeholder="URL To Share"> (Optional)
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <label class="control-label">Layout:</label>
+							    <div class="controls">
+							    	<label class="radio">
+							      		<input type="radio" name="r9" id="share_top"  > Vertical
+							      	</label>
+							      	<label class="radio">
+							      		<input type="radio" name="r9" id="share_right"> Horizonal
+							    	</label>
+							    	<label class="radio">
+							      		<input type="radio" name="r9" id="share_no_count"> No Count
+							    	</label>
+							    </div>
+							  </div>
+		          		</div>
+		          	</li>
+		          	<li class="span5">
+		          	</li>
+		          </ul>
+				  </div><br />
+				  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="ln_getcode_share()"> Get Code </button>
+				  </div>
+				</div>			 
+
+				<div id="ln_member_profile_link" class="tab-pane">
+				 <div class="page-header">
+		          	<h3> Linkedin Member Profile</h3>
+		          </div>
+		          <p>Bring LinkedIn member profiles to your site to help users discover common professional connections.</p>
+		          <br>
+		          <div class=" well">
+		          <div class="row-fluid">
+		          <ul>
+		          	<li class="span7">
+		          		<div class="form-horizontal">
+							  <div class="control-group">
+							    <label class="control-label">Public Profile URL: </label>
+							    <div class="controls">
+							      	<input type="text" id="profile_url" placeholder="URL To Share">
+							    </div>
+							  </div>
+							  <div class="control-group">
+							    <label class="control-label">Layout:</label>
+							    <div class="controls">
+							    	<label class="radio">
+							      		<input type="radio" name="r10" id="profile_inline"  > Inline
+							      	</label>
+							      	<label class="radio">
+							      		<input type="radio" name="r10" id="profile_hover"> Icon (On Hover)
+							    	</label>
+							    	<label class="radio">
+							      		<input type="radio" name="r10" id="profile_click"> Icon (On Click)
+							    	</label>
+							    </div>
+							  </div>
+		          		</div>
+		          	</li>
+		          	<li class="span5">
+		          	</li>
+		          </ul>
+				  </div><br />
+				  <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="ln_getcode_profile()"> Get Code </button>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+		  
+<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	      	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        	<h4 class="modal-title" id="myModalLabel">Plugin Code : </h4>
+	      	</div>
+	      	<div class="modal-body">
+	        	<pre class="code">
+				</pre>
+	      	</div>
+	    </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->	
+</div><!-- /.modal -->
+

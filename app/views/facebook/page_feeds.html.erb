@@ -1,0 +1,223 @@
+<% if @fb_page %>
+
+<% if @page %>
+	<% feeds = @fb_page.get_page(@page) %>
+<% else %>
+	<% feeds = @fb_page.get_connections("me", "feed",:limit => 10,:date_format => 'U') %> <br><br>
+<% end %>
+
+<!-- ---------------------------------Page Feeds----------------------------------------- -->
+
+<h4> Page Feeds: </h4>
+
+<div class="row-fluid">
+
+	<div class="span5 offset2">
+
+		<%= form_tag(:action => 'status_update') do %>
+			<%= text_area_tag(:msg, nil, :size => "7x2") %><br>	
+			<%= submit_tag "Submit", class: "btn btn-primary btn-small" %>
+		<% end %>
+
+	</div>
+
+</div>
+
+<b>No of Posts: <%= feeds.size %></b><br>
+
+<% i = 0 %>
+<% feeds.each do |f| %>
+
+<div class="post box">
+
+	<div class="row-fluid">
+
+			<div class="span9 offset1">
+			
+				<% if f['icon'] %>
+					<%= image_tag f['icon'] %>
+				<% else %>
+					<%= image_tag 'fb_icon.png',:height => '17px',:width => '17px' %>
+				<% end %>
+
+				<% if f['from']['category'] %>
+					<%= f['from']['category'] %>
+				<% end %>
+
+				<% if f['from']['name']%>
+					<%= f['from']['name'] %>	
+					&nbsp;<i>posted</i>
+				<% end %>	
+
+				&nbsp;
+
+				<%= f['type'] %>
+				<% if  f['status_type'] %>
+					(<%= f['status_type'] %>)
+				<% end %>
+
+			</div>	
+
+	</div>
+
+	<div class="row-fluid">
+
+			<div class="span2 offset1">
+			<center>
+				<% if f['picture'] %>
+			  		<%= image_tag f['picture'],:class => 'img-polaroid' %>
+	    		<% else %>
+	 				<br><br><br><br>
+	  			<% end %>
+	  		</center>
+			</div>
+
+			<div class="span7">
+
+				<% if f['link'] %>
+					<%= link_to truncate(f['link'],:length => 60), f['link'] %><br>
+				<% end %>
+
+				<% if f['name']%>
+					<%= f['name'] %><br>
+				<% end %>
+				
+				<div style="font-size:11px">
+					<% if f['description'] %>
+						<%= f['description'] %>
+					<% end %>
+
+					<% if f['message'] %>
+						<%= f['message'] %>
+					<% end %>
+				</div>
+
+				
+
+			</div>
+
+	</div>
+
+	<div class="row-fluid">
+
+			<div class="span3 offset3">
+				<% if f['user_likes'] == 'true' %>
+					<%= link_to glyph('thumbs-down'), {:controller => 'facebook',:action => 'unlike',:id => f['id']} %>
+				<% else %>	
+					<%= link_to glyph('thumbs-up'), {:controller => 'facebook',:action => 'like',:id => f['id']} %>	
+				<% end %>
+				.
+				
+				<a href="#CommentModal" role="button"  data-toggle="modal"><%= glyph('comment') %></a>.
+				.
+				<%= link_to glyph('share'), {:controller => 'facebook',:action => '#',:page => feeds.previous_page_params} %>
+				.
+
+				<!-- ------------------------------------ Likes--------------------------------------- -->
+				<% if f['likes'] %>
+					<a href="#LikesModal<%= i %>" role="button"  data-toggle="modal">Likes</a>.
+
+					<div id="LikesModal<%= i %>" style="margin-left: -155px;" class="modal hide fade span2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+					    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					    	<h3 id="myModalLabel">Likes (<%= f['likes']['data'].size %>)</h3>
+					  	</div>
+					  	<div class="modal-body">
+					  		<table class="table table-striped">
+		   						<% f['likes']['data'].each do |l| %>
+						 	 		<tr>
+						 	 			<td><%= l['name'] %></td>
+						 	 		</tr>
+						 		<% end %>
+							</table>
+  						</div>
+					  	<div class="modal-footer">
+					    	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+					  	</div>
+					</div>
+				<% end %>
+				
+				<!-- ------------------------------------ Post Comments --------------------------------------- -->
+				<div id="CommentModal" style="margin-left: -155px;" class="modal hide fade span5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">Post a Comment</h3>
+					</div>
+					<div class="modal-body">
+						<%= form_tag( :action => 'comment' ) do  %>
+								<ul class="row-fluid">
+							      <li class='span3'><h4><small>Comment</small></h4></li>
+							      <li class='span3'><%= text_area_tag :msg, nil,:length => '100'  %></li>
+							      <%= hidden_field_tag 'id', f['id'] %>
+							      <li class='span3'><br><%= submit_tag "Post", class: "btn btn-primary" %></li>
+							    </ul>  
+							     <br><br>
+					    <% end %>
+					</div>
+					<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+					</div>
+				</div>
+
+				<!-- ------------------------------------ Comments --------------------------------------- -->
+				<% if f['comments'] %>
+					<a href="#CommentModal<%= i %>" role="button"  data-toggle="modal">Comments</a>.
+
+					<div id="CommentModal<%= i %>" style="margin-left: -155px;" class="modal hide fade span5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  		<div class="modal-header">
+				    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				    		<h3 id="myModalLabel">Comments (<%= f['comments']['data'].size %>)</h3>
+				  		</div>
+				  		<div class="modal-body">
+					    	<table class="table table-striped">
+					  			<tr>
+					  				<th>Name</th>
+					  				<th>Message</th>
+					  				<th>Likes</th>
+					  			</tr>
+		   						<% f['comments']['data'].each do |c| %>
+						 	 	<tr>
+						 	 		<td><%= c['from']['name'] %></td>
+						 	 		<td><%= c['message'] %></td>
+						 	 		<td><%= c['like_count'] %></td>
+						 	 	</tr>
+						 		<% end %>
+							</table>
+				  		</div>
+				  		<div class="modal-footer">
+				    		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+				  		</div>
+					</div>
+				<% end %>
+
+			</div>
+
+			<div class="span5">
+
+				<small>
+					<%= Time.at(f['created_time']).to_formatted_s(:short) %>(<%= Time.at(f['updated_time']).to_formatted_s(:short) %>) &nbsp; 
+
+					<% if f['application'] %>
+			  			 via 
+			  			 <i>	
+						<%= f['application']['name'] %>
+						<% if  f['application']['namespace'] %>
+							(<%= f['application']['namespace'] %>)	
+						<% end %>
+						</i>
+  					<% end %>	
+				</small>
+				
+			</div>
+
+	</div>
+
+</div>
+
+<% end %>
+<% end %>
+
+<ul class="pager" >
+  				<li><%= link_to "Previous", {:controller => 'facebook',:action => 'page_feeds',:page => feeds.previous_page_params} %></a></li>
+			    <li><%= link_to "Next", {:controller => 'facebook',:action => 'page_feeds',:page => feeds.next_page_params} %></a></li>
+</ul>

@@ -1,0 +1,117 @@
+<% if @li %>
+
+<!-- ----------------------------------- User Profile ----------------------------------------- -->
+
+	<h4> Friends Profile </h4>
+
+	<% li_pic = @li.picture_urls(:id => params[:id]) %>
+
+	<% if li_pic.all %>
+		<% li_pic.all.each do |f| %>
+			<center>
+				<%= image_tag(f,:class => 'img-polaroid') %><br><br>
+			</center>
+		<% end %>
+	<% else %>
+		<center>
+			<%= image_tag 'profile_picture.jpg',:class =>'img-polaroid' %>
+		</center>
+	<% end %>
+
+
+	<% li_us = @li.profile(:id => params[:id], :fields => [:id,:first_name, :last_name , :formatted_name ,:headline,:location,:industry,:summary,:picture_url,:associations, :honors, :interests,:positions,:educations,:public_profile_url,:site_standard_profile_request,:specialties,:num_connections,:email_address,:skills,:date_of_birth,:phone_numbers,:following,:related_profile_views,:main_address,:relation_to_viewer]) %>
+
+	
+	<% li_us = li_us.to_hash %><br><br>
+
+	<% i = 0 %>
+	
+	
+
+<div class="row-fluid">
+<div class="span10">
+	<table class="table">
+
+	  <tr>
+	    <th class="span2" >Sr.No.</th>
+	    <th class="span3" >Name</th>
+	    <th class="span7" >Value</th>
+	  </tr>
+  
+
+	   
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Name</td>
+	      <td><%= li_us['formatted_name'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Email Address</td>
+	      <td><%= li_us['email_address'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Headline</td>
+	      <td><i><%= li_us['headline'] %></i></td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Locations</td>
+	      <td>
+	      		<%= li_us['location']['name'] %> 
+	      </td>
+	    </tr>
+	    <tr>
+		      <td><%= i+=1 %></td>
+			  <td>Positions</td>
+			  <td>
+			  		<% if li_us['positions']['total'] > 0 %>
+			  			<% n=0 %> 
+		    			<% li_us['positions']['all'].each do |f|%>
+			    			(<%= n+=1 %>.) ID: <%= f['id'] %><br>
+			    			Title:<%= f['title'] %><br>
+			    			Summary: <%= f['summary'] %><br>		    			
+			    			Company Name: <%= f['company']['name'] %><br>
+			    			Company Industry: <%= f['company']['industry'] %><br>
+			    			Start Date: <%= f['start_date']['month'] %>,<%= f['start_date']['year'] %><br>
+			    			Working Currently: <%= f['is_current'] %><br><br>
+				  		<% end %>
+			  		<% end %>
+			  </td>					
+		</tr>	
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>No. of Connections</td>
+	      <td><%= li_us['num_connections'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Public Profile URL</td>
+	      <td><%= link_to truncate(li_us['public_profile_url'],:length => 40),li_us['public_profile_url'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Site Standard Profile Request</td>
+	      <td><%= link_to truncate(li_us['site_standard_profile_request']['url'],:length => 40),li_us['site_standard_profile_request']['url'] %> </td>
+	    </tr>
+	    <tr>
+	      <td><%= i+=1 %></td>
+	      <td>Relation to Viewer</td>
+	      <td style="text-align:left">Distance : <i><%= li_us['relation_to_viewer']['distance'] %></i> <br> 
+	      	  Connections : <br>
+	      	  <i><% if  li_us['relation_to_viewer']['connections']['total'] > 0 %>
+	      	  		<% li_us['relation_to_viewer']['connections']['all'].each do |f| %>
+	      	  			<%= f['person']['first_name']%> <%= f['person']['last_name']%>,&nbsp;
+      	  			<% end %>
+  	  		  	 <% end %>
+  		  	  </i>
+	      </td>
+	    </tr>
+
+	</table>
+</div>
+</div>
+
+<% end %>
+

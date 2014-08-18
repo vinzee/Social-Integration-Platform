@@ -1,0 +1,30 @@
+
+<!-- ----------------------------------- followers ----------------------------------------- -->
+
+<% if @tw %>
+	<h4 class="box"> Followers </h4>
+	<% tw_followers = @tw.followers() %>
+	<% tw_followers.each do |f| %>
+		<div class="row-fluid box">
+            <div class="span1">
+	  			<% if f['profile_image_url_https'] %>
+	  				<%= image_tag(f['profile_image_url_https'], :class =>'img-polaroid') %>
+				<% else %>
+					<%= image_tag 'profile_picture.jpg'%>
+	  			<% end %>
+	  		</div>
+	  		<div class="span9"> 		
+		  		<b><%= f['name'] %></b> @<%= f['screen_name'] %><br>	
+		  		<% f['id'] %>
+		  		<p><%= f['description'] %><br></p>
+	  		</div>
+	  		<div class="span1">
+	  			<% if f['following'] then %>
+	  				<%= link_to "Following",{:controller => 'twitter',:action => 'unfollow',:id => f['id'].to_i}, class: "btn btn-primary btn-small" %>
+	  			<% else %>
+	  				<%= link_to "Follow",{:controller => 'twitter',:action => 'follow',:id => f['id'].to_i},class: "btn btn-primary btn-small" %>
+	  			<% end %>
+	  		</div>
+  		</div>
+  	<% end %>
+<% end %>

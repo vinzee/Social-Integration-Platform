@@ -1,0 +1,59 @@
+<% if @li %>
+		<!-- ----------------------------------- Job Suggestions ----------------------------------------- -->
+	<% j_s =  @li.job_suggestions %>
+
+	<div class="row-fluid box">
+		<div class="span4">
+			<h4> Job Suggestions <small>(<%= j_s.total_results %>)</small></h4>
+		</div>
+		<div class="span3 offset5">
+			<%= link_to "Job Bookmarks", :controller => 'linkedin',:action => 'jobs_bookmarks'%>
+		</div>
+		
+	</div>
+
+		
+		<% if j_s.facets.total > 0 %>
+			<h5>Facets <small>(<%= j_s.facets.total %>)</small></h5>
+
+			<%= j_s.facets.all %><br><br>
+		<% end %>
+
+		<h5>Jobs <small>(<%= j_s.jobs.total %>)</small></h5>
+
+		<% if j_s.jobs.total > 0 %>		
+			<% j_s.jobs.all.each do |f| %>
+				<% f = f.to_hash %>
+				
+				<div class="row-fluid">
+					<b><%= f['company']['name'] %></b>
+				</div>
+				<div class="row-fluid">
+					<div class="span11">
+						<i><%= f['description_snippet'] %></i>
+					</div>
+				</div>
+				<div class="row-fluid box">
+					<div class="span1">
+						<b>Posted By :</b>
+					</div>
+					<div class="span8">		
+						<b><%= f['job_poster']['first_name'] %> <%= f['job_poster']['first_name'] %></b><br>
+						<i><%= f['job_poster']['headline'] %></i><br>		
+						<%= f['location_description'] %>
+					</div>
+				</div>
+				<br>
+
+				<!-- 
+				<b>Company Id :</b> <%# f['company']['id'] %><br>
+				<b>Job Id :</b> <%# f['id'] %><br>
+				<b>Id :</b> <%# f['job_poster']['id'] %><br>	
+				 -->
+			<% end %>			
+		<% end %>
+
+		<%# end %>
+
+
+<% end %>

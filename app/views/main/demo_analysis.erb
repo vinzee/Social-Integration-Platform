@@ -1,0 +1,32 @@
+<h4> Sentiment Analyzer Demo</h4>
+<div class="row-fluid">
+		<%= form_tag( :action => 'demo_analysis' ) do  %>
+		<center>
+		      <%= text_area_tag :str, nil , size: "30x4",:placeholder => 'Enter a sentence' %>&nbsp;&nbsp;&nbsp;
+ 		      <%= submit_tag "Get Sentiment", class: "btn btn-primary btn-large" %> 
+	    </center>
+		<% end %>
+	
+</div>
+
+<br><br>
+
+<div class="row-fluid box" style="font-size:14px">
+	<div class="span4 offset5">
+		
+		<% if @rez %>
+			<p>Text        : <i><%= @rez['text'] %></i></p>
+			<p>Sentiment   : 
+			<b><i>
+       			<% if @rez['sentiment']  == ":)" %>
+       				Positive
+       			<% elsif @rez['sentiment']  == ":|" %>
+       				Neutral
+       			<% elsif @rez['sentiment']  == ":(" %>
+       				Negative
+       			<% end %>	<br>
+   			</i></b></p>
+			<p>Probability : <%= @rez['probability'].round(3) %></p>
+		<% end %>
+	</div>
+</div>

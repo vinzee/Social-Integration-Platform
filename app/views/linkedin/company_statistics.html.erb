@@ -1,0 +1,47 @@
+<% if @li %>
+
+		<!-- ----------------------------------- Company ----------------------------------------- -->
+
+		<h2> Company : </h2><br>
+
+		
+
+		<% li_con = @li.company_statistics(:id => @id, :is_company_admin => true) %>
+		<% li_con = li_con.to_hash %>
+
+		<h3>Follow Statistics : </h3><br>	
+
+		<% li_con['follow_statistics'].each do |k,v| %>
+			<%= k %><br>
+		<% end %>
+
+		company_sizes
+		count
+		countries
+		counts_by_month
+		functions
+		industries
+		non_employee_count
+		regions
+		seniorities
+
+		
+
+		<h3> Status Update Statistics : </h3><br>	
+
+		<h4>Views By Month :</h4>
+
+		<% if li_con['status_update_statistics']['views_by_month']['total'] > 0 %>
+			<% li_con['status_update_statistics']['views_by_month']['all'].each do |f| %>	
+				Date : <%= f['date']['month'] %> <%= f['date']['year'] %><br>
+				Clicks : <%= f['clicks'] %><br>
+				Comments : <%= f['comments'] %><br>
+				Engagement : <%= f['engagement'] %><br>
+				Impressions : <%= f['impressions'] %><br>
+				Likes : <%= f['likes'] %><br>
+				Shares : <%= f['shares'] %><br><br>
+			<% end %><br>
+		<% end %>
+		
+
+<% end %>

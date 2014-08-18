@@ -1,0 +1,30 @@
+
+<html>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<head>
+	  <title>Social Integration Platform</title>
+	  <%= favicon_link_tag 'sip.ico' %>
+	  <%= stylesheet_link_tag "application", :media => "all" %>
+	  <%= stylesheet_link_tag params[:controller] %>
+	  <%= javascript_include_tag "application" %>
+	  <%= javascript_include_tag params[:controller] %>
+	  <% if params[:action] == "friends_profile" ||  params[:action] == "page_profile" ||  params[:action] == "page_feeds" || params[:action] == "company_profile" || params[:action] == "company_updates" || params[:action] == "user_profile" || params[:action] == "group_profile" || params[:action] == "group_feed" || params[:action] == "jobs_profile" || params[:action] == "jobs_suggestions"%>
+	  	<script>
+	  		$('.back', window.parent.document).show();
+	  	</script>
+	  <% else %>
+	  	<script>
+	  		$('.back', window.parent.document).hide();
+	  	</script>
+	  <% end %>
+	</head>
+	<body style="overflow: hidden; padding-top: 0px;font-size:12px;padding-left: 15px;">
+		 <% if notice || alert %>
+		  	<p class="alert"><%= notice %> <br> <%= alert %> </p>
+		 <% end %>
+	 
+	 <%= yield %>
+		  
+	<div class="modall"></div>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<% if @fb %>
+<!-- ---------------------------------Friends info--------------------------------------- -->
+
+<% @id.to_i %>
+<% friends = @fb.get_object(@id.to_i,:date_format => 'U') %>
+
+<% picture_url = @fb.get_picture(@id.to_i,:type => 'large') %>
+
+
+
+<div class="row-fluid box">
+	<div class="span6">
+		<center>
+			<%= image_tag(picture_url, :class => 'img-polaroid') %><br>
+		</center>
+	</div>
+	<div class="span6">
+		<%= friends['name']%><small class="grey"> (<%= friends['username']%>)</small><br>
+	    Gender : <%= friends['gender']%><br>
+	    <%= link_to truncate(friends['link'],:length => 40), friends['link'],:target => '_blank' %><br>
+	    Locale : <i><%= friends['locale']%></i><br>
+	    Updated Time : <i><%= Time.at(friends['updated_time']).to_formatted_s(:short) %></i><br>
+	</div>
+	
+</div>
+<% end %>
